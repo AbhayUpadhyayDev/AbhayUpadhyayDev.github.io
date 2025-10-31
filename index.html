@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhay Kumar Upadhyay | Full‑Stack Engineer</title>
+  <title>Abhay Kumar Upadhyay | Full-Stack Engineer</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Inter Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Favicon -->
   <link rel="icon" href="https://avatars.githubusercontent.com/u/156398531?v=4" />
 
-  <!-- Tailwind config (no JS needed) -->
   <script>
     tailwind.config = {
       theme: {
@@ -22,7 +21,8 @@
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
             primary: '#0EA5E9',
-            dark:   '#0F172A',
+            accent: '#06B6D4',
+            dark: '#0F172A',
             slate: { 850: '#1E293B', 900: '#0F172A' }
           }
         }
@@ -31,252 +31,346 @@
   </script>
 
   <style>
-    .glass { background: rgba(30,41,59,.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-             border: 1px solid rgba(148,163,184,.15); }
-    .card { transition: transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s ease; }
-    .card:hover { transform: translateY(-12px);
-                  box-shadow: 0 20px 25px -5px rgba(14,165,233,.15), 0 10px 10px -5px rgba(0,0,0,.04); }
-    @keyframes fadeIn { from {opacity:0} to {opacity:1} }
-    @keyframes slideUp { from {transform:translateY(20px);opacity:0} to {transform:translateY(0);opacity:1} }
-    .animate-fade { animation: fadeIn .6s ease-out forwards; }
-    .animate-slide { animation: slideUp .7s ease-out forwards; }
+    :root { scroll-behavior: smooth; }
+
+    /* Glass & Neumorphic */
+    .glass { 
+      background: rgba(30,41,59,.55); 
+      backdrop-filter: blur(14px); 
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(148,163,184,.2); 
+    }
+    .neumorphic {
+      background: rgba(30,41,59,.55);
+      box-shadow: 
+        8px 8px 16px rgba(0,0,0,.25),
+        -8px -8px 16px rgba(255,255,255,.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .neumorphic:hover {
+      box-shadow: 
+        12px 12px 24px rgba(0,0,0,.3),
+        -12px -12px 24px rgba(255,255,255,.08);
+      transform: translateY(-8px);
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(to right, #ffffff, #0EA5E9, #06B6D4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Sticky Nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    /* Mobile Menu (CSS-only) */
+    #mobile-toggle { display: none; }
+    #mobile-toggle:checked ~ .mobile-menu {
+      transform: translateX(0);
+    }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 280px;
+      background: rgba(15,23,42,.98);
+      backdrop-filter: blur(12px);
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+      padding: 6rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      z-index: 60;
+    }
+
+    /* Staggered Fade-Up */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp 0.7s ease-out forwards;
+    }
+
+    /* Letter-by-letter typing effect (CSS) */
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #0EA5E9;
+      animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+      width: 0;
+      animation-fill-mode: forwards;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #0EA5E9 }
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Floating orb background */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.2;
+      animation: float 8s ease-in-out infinite;
+    }
+    .orb-1 { width: 400px; height: 400px; background: #0EA5E9; top: -100px; left: -100px; }
+    .orb-2 { width: 500px; height: 500px; background: #06B6D4; bottom: -150px; right: -150px; animation-delay: -4s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(5deg); }
+    }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-slate-900 via-slate-950 to-black text-gray-100 min-h-screen">
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-gray-100 min-h-screen">
+
+  <!-- ==================== NAV (Sticky + Mobile) ==================== -->
+  <nav class="sticky-nav glass border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
+      <a href="#" class="text-2xl font-bold gradient-text">AU</a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#about" class="hover:text-primary transition">About</a>
+        <a href="#skills" class="hover:text-primary transition">Skills</a>
+        <a href="#projects" class="hover:text-primary transition">Projects</a>
+        <a href="#contact" class="hover:text-primary transition">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Trigger -->
+      <label class="md:hidden cursor-pointer z-50">
+        <input type="checkbox" id="mobile-toggle" class="hidden">
+        <span class="block w-6 h-6 relative">
+          <span class="block absolute h-0.5 w-full bg-white transition-all duration-300 top-1" style="top: 4px;"></span>
+          <span class="block absolute h-0.5 w-full bg-white transition-all duration-300 top-1/2 -translate-y-1/2"></span>
+          <span class="block absolute h-0.5 w-full bg-white transition-all duration-300 bottom-1" style="bottom: 4px;"></span>
+        </span>
+      </label>
+    </div>
+
+    <!-- Mobile Menu (CSS-only) -->
+    <div class="mobile-menu">
+      <a href="#about" class="text-xl hover:text-primary transition">About</a>
+      <a href="#skills" class="text-xl hover:text-primary transition">Skills</a>
+      <a href="#projects" class="text-xl hover:text-primary transition">Projects</a>
+      <a href="#contact" class="text-xl hover:text-primary transition">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Hamburger Animation -->
+  <style>
+    #mobile-toggle:checked ~ .mobile-menu { transform: translateX(0); }
+    #mobile-toggle:checked + label span:nth-child(1) { transform: rotate(45deg); top: 50%; }
+    #mobile-toggle:checked + label span:nth-child(2) { opacity: 0; }
+    #mobile-toggle:checked + label span:nth-child(3) { transform: rotate(-45deg); bottom: 50%; }
+  </style>
 
   <!-- ==================== HERO ==================== -->
-  <header class="relative overflow-hidden py-24 px-6">
-    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-transparent"></div>
+  <header class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <!-- Floating Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
     <div class="relative z-10 max-w-5xl mx-auto text-center">
       <img src="https://avatars.githubusercontent.com/u/156398531?v=4"
            alt="Abhay Kumar Upadhyay"
-           class="w-28 h-28 mx-auto rounded-full ring-4 ring-primary/30 shadow-2xl animate-fade">
-      <h1 class="mt-6 text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-400">
+           class="w-32 h-32 mx-auto rounded-full ring-4 ring-primary/40 shadow-2xl">
+
+      <h1 class="mt-8 text-5xl md:text-7xl font-extrabold gradient-text">
         Abhay Kumar Upadhyay
       </h1>
-      <p class="mt-3 text-xl md:text-2xl font-medium text-blue-300">
-        Full‑Stack Engineer &amp; System Architect
+
+      <!-- CSS Typewriter Effect -->
+      <p class="mt-6 text-xl md:text-2xl font-medium text-cyan-300">
+        <span class="typewriter inline-block">Full-Stack Engineer &amp; System Architect</span>
       </p>
-      <p class="mt-5 text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-        Crafting <span class="text-primary font-semibold">high‑performance</span>,
-        <span class="text-primary font-semibold">scalable</span> solutions with .NET Core,
-        Microservices, and Cloud‑Native stacks.
+
+      <p class="mt-6 text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Crafting <span class="text-primary font-bold">high-performance</span>, 
+        <span class="text-accent font-bold">scalable</span> solutions with .NET Core, 
+        Microservices, and Cloud-Native stacks.
       </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
+
+      <!-- CTA Buttons -->
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
         <a href="https://github.com/abhayupadhyaydev" target="_blank"
-           class="px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition">
+           class="px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
           GitHub
         </a>
         <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank"
-           class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition">
+           class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition flex items-center gap-2">
           LinkedIn
         </a>
         <a href="mailto:abhayupadhyay503@gmail.com"
-           class="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg transition">
+           class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
           Let’s Talk
         </a>
+      </div>
+
+      <!-- Open to Work Badge -->
+      <div class="mt-8 inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">
+        Open to Full-Stack / Backend Roles
+      </div>
+
+      <!-- Scroll Hint -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-hint text-gray-400">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
       </div>
     </div>
   </header>
 
   <!-- ==================== ABOUT ==================== -->
-  <section class="py-20 px-6 bg-slate-850/50">
+  <section id="about" class="py-24 px-6 bg-slate-850/40">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-primary animate-slide">About Me</h2>
-      <p class="mt-6 text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
-        Full‑Stack Engineer with <strong class="text-primary">2+ years</strong> building production‑grade systems for
-        <span class="text-blue-400">e‑commerce, travel, government, logistics, and fintech</span>.
+      <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-fadeUp">About Me</h2>
+      <p class="mt-8 text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto animate-fadeUp" style="animation-delay: 0.2s">
+        Full-Stack Engineer with <strong class="text-primary">2+ years</strong> building production-grade systems for
+        <span class="text-cyan-400">e-commerce, travel, government, logistics, and fintech</span>.
         I design <strong class="text-white">clean, testable APIs</strong> and deploy
-        <strong class="text-primary">cloud‑native microservices</strong> that handle millions in transactions.
+        <strong class="text-primary">cloud-native microservices</strong> that handle millions in transactions.
       </p>
     </div>
   </section>
 
   <!-- ==================== TECH STACK ==================== -->
-  <section class="py-20 px-6">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Core Expertise</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <!-- List of skills – pure HTML, no JS -->
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0s">.NET Core</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.1s">C#</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.2s">ASP.NET API</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.3s">SQL Server</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.4s">AWS</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.5s">Redis</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.6s">Supabase</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.7s">Microservices</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.8s">RESTful APIs</div>
-        <div class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide" style="animation-delay:0.9s">System Design</div>
+  <section id="skills" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-16 animate-fadeUp">Core Expertise</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0s">.NET Core</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.1s">C#</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.2s">ASP.NET API</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.3s">SQL Server</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.4s">AWS</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.5s">Redis</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.6s">Supabase</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.7s">Microservices</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.8s">RESTful APIs</div>
+        <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.9s">System Design</div>
       </div>
     </div>
   </section>
 
   <!-- ==================== PROJECTS ==================== -->
-  <section class="py-20 px-6 bg-slate-850/30">
+  <section id="projects" class="py-24 px-6 bg-slate-850/30">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-16">Production &amp; Personal Systems</h2>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-
-        <!-- 1. CheapFareMart Car Booking -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-16 animate-fadeUp">Production &amp; Personal Systems</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">CheapFareMart Car Booking</h3>
+            <h3 class="text-xl font-bold text-white">CheapFareMart Car Booking</h3>
             <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium">Live</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Led full‑stack development of a <strong class="text-primary">high‑throughput car‑rental platform</strong> – real‑time inventory,
-            secure payments, third‑party API orchestration with <strong>.NET Core microservices on AWS</strong>.
-          </p>
-          <a href="https://www.cheapfaremart.com/cars" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            View Live System <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Led full-stack development of a high-throughput car-rental platform – real-time inventory, secure payments, third-party API orchestration with .NET Core microservices on AWS.</p>
+          <a href="https://www.cheapfaremart.com/cars" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">View Live →</a>
         </div>
 
-        <!-- 2. Flight Booking API Engine -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 2 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.1s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Flight Booking API Engine</h3>
+            <h3 class="text-xl font-bold text-white">Flight Booking API Engine</h3>
             <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium">Live</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Engineered <strong class="text-primary">RESTful APIs</strong> for a global flight platform – JWT auth,
-            Redis caching, distributed transactions handling <strong>10K+ req/min</strong>.
-          </p>
-          <a href="https://www.cheapfaremart.com" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Explore Platform <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Engineered RESTful APIs for a global flight platform – JWT auth, Redis caching, distributed transactions handling 10K+ req/min.</p>
+          <a href="https://www.cheapfaremart.com" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Explore →</a>
         </div>
 
-        <!-- 3. INBiz & BSD Modernization -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 3 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.2s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">INBiz &amp; BSD Modernization</h3>
+            <h3 class="text-xl font-bold text-white">INBiz &amp; BSD Modernization</h3>
             <span class="text-xs bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full font-medium">GovTech</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Boosted Indiana State’s <strong class="text-primary">business‑licensing portal</strong> – 40% backend speed gain
-            via clean architecture and optimized SQL.
-          </p>
-          <a href="https://inbiz.in.gov/" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Visit Portal <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Boosted Indiana State’s business-licensing portal – 40% backend speed gain via clean architecture and optimized SQL.</p>
+          <a href="https://inbiz.in.gov/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Visit →</a>
         </div>
 
-        <!-- 4. Samrat Hardware ERP -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 4 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.3s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Samrat Hardware ERP</h3>
-            <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-medium">E‑Commerce</span>
+            <h3 class="text-xl font-bold text-white">Samrat Hardware ERP</h3>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-medium">E-Commerce</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Built a full‑featured <strong class="text-primary">inventory + order system</strong> with payment gateway,
-            analytics dashboard, and role‑based access.
-          </p>
-          <a href="http://samratsanitary.org/" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Live Demo <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Built a full-featured inventory + order system with payment gateway, analytics dashboard, and role-based access.</p>
+          <a href="http://samratsanitary.org/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Live Demo →</a>
         </div>
 
-        <!-- 5. Dairy Management API -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 5 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.4s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Dairy Management API</h3>
+            <h3 class="text-xl font-bold text-white">Dairy Management API</h3>
             <span class="text-xs bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full font-medium">Company</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Designed a <strong class="text-primary">scalable .NET Core API</strong> for milk collection,
-            quality checks, farmer payouts, and real‑time reporting.
-          </p>
-          <a href="https://dairy-demo.abhayupadhyay.dev" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Live API Docs <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Designed a scalable .NET Core API for milk collection, quality checks, farmer payouts, and real-time reporting.</p>
+          <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">API Docs →</a>
         </div>
 
-        <!-- 6. Rent Management System (In‑Progress) -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 6 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.5s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Rent Management System</h3>
-            <span class="text-xs bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full font-medium">WIP</span>
+            <h3 class="text-xl font-bold text-white">Rent Management System</h3>
+            <span class="text-xs bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full font-medium">Company</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Building a <strong class="text-primary">multi‑tenant rent portal</strong> – automated invoicing,
-            late‑fee calculations, tenant dashboards, and payment integrations.
-          </p>
-          <a href="https://rent.abhayupadhyay.dev" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Preview <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Building a multi-tenant rent portal – automated invoicing, late-fee calculations, tenant dashboards, and payment integrations.</p>
+          <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Preview →</a>
         </div>
 
-        <!-- 7. Flight Baggage API Integration -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 7 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.6s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Flight Baggage API</h3>
-            <span class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full font-medium">Company</span>
-          </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Integrated airline baggage‑tracking APIs into the booking engine – real‑time weight,
-            status updates, and automated compensation logic.
-          </p>
-          <a href="https://baggage-demo.abhayupadhyay.dev" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Live Endpoint <span class="ml-2">→</span>
-          </a>
-        </div>
-
-        <!-- 8. Expense Manager (Flutter + Supabase) -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Expense Manager</h3>
+            <h3 class="text-xl font-bold text-white">Expense Manager</h3>
             <span class="text-xs bg-teal-500/20 text-teal-400 px-3 py-1 rounded-full font-medium">Personal</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Cross‑platform <strong class="text-primary">Flutter app</strong> with Supabase backend – budget tracking,
-            OCR receipt scanning, and visual analytics.
-          </p>
-          <a href="https://expense.abhayupadhyay.dev" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Web Demo <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Cross-platform Flutter app with Supabase backend – budget tracking, OCR receipt scanning, and visual analytics.</p>
+          <a href="https://expense.abhayupadhyay.dev" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Web Demo →</a>
         </div>
 
-        <!-- 9. Task Manager (Flutter + Supabase) -->
-        <div class="card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+        <!-- Project 8 -->
+        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.7s">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Task Manager</h3>
+            <h3 class="text-xl font-bold text-white">Task Manager</h3>
             <span class="text-xs bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full font-medium">Personal</span>
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
-            Collaborative <strong class="text-primary">task board</strong> built with Flutter &amp; Supabase –
-            Kanban view, real‑time sync, notifications, and team permissions.
-          </p>
-          <a href="https://tasks.abhayupadhyay.dev" target="_blank"
-             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
-            Live App <span class="ml-2">→</span>
-          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">Collaborative task board built with Flutter & Supabase – Kanban view, real-time sync, notifications, and team permissions.</p>
+          <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Live App →</a>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="py-12 px-6 border-t border-slate-800">
+  <footer id="contact" class="py-16 px-6 border-t border-slate-800">
     <div class="max-w-5xl mx-auto text-center">
       <p class="text-gray-500">
-        © 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> —
+        © 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — 
         Handcrafted with precision using GitHub Pages &amp; Tailwind CSS
       </p>
     </div>
   </footer>
-
 </body>
 </html>
