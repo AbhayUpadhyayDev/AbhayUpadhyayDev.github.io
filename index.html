@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Inter Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Favicon -->
   <link rel="icon" href="https://avatars.githubusercontent.com/u/156398531?v=4" />
@@ -24,12 +24,7 @@
             primary: '#0EA5E9',
             accent: '#06B6D4',
             dark: '#0F172A',
-            light: '#F8FAFC',
-            slate: { 50: '#f8fafc', 100: '#e2e8f0', 800: '#1e293b', 900: '#0f172a' }
-          },
-          animation: {
-            'float': 'float 10s ease-in-out infinite',
-            'fadeUp': 'fadeUp 0.8s ease-out forwards',
+            light: '#F8FAFC'
           }
         }
       }
@@ -39,45 +34,43 @@
   <style>
     :root { scroll-behavior: smooth; }
 
-    /* Theme Variables */
+    /* Theme */
     [data-theme="dark"] {
       --bg: #0f172a;
       --text: #f1f5f9;
-      --card-bg: rgba(30, 41, 59, 0.7);
-      --card-border: rgba(148, 163, 184, 0.2);
-      --glass: rgba(255, 255, 255, 0.08);
-      --shadow: rgba(0, 0, 0, 0.3);
+      --card: rgba(30, 41, 59, 0.85);
+      --border: rgba(148, 163, 184, 0.2);
+      --glass: rgba(255, 255, 255, 0.1);
     }
     [data-theme="light"] {
       --bg: #f8fafc;
       --text: #1e293b;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-border: rgba(0, 0, 0, 0.1);
-      --glass: rgba(255, 255, 255, 0.7);
-      --shadow: rgba(0, 0, 0, 0.15);
+      --card: rgba(255, 255, 255, 0.9);
+      --border: rgba(0, 0, 0, 0.1);
+      --glass: rgba(255, 255, 255, 0.8);
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      line-height: 1.5;
     }
 
-    /* Glassmorphic Card */
     .glass-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      border-radius: 1.5rem;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px var(--shadow);
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .glass-card:hover {
-      transform: translateY(-12px) scale(1.02);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     }
 
-    /* Gradient Text */
     .gradient-text {
       background: linear-gradient(to right, #0EA5E9, #06B6D4);
       -webkit-background-clip: text;
@@ -85,325 +78,217 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Typewriter */
-    .typewriter {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 3px solid #0EA5E9;
-      animation: typing 4s steps(50) forwards, blink 0.75s step-end infinite;
-      width: 0;
-      display: inline-block;
-    }
-    @keyframes typing { to { width: 100%; } }
-    @keyframes blink { 50% { border-color: transparent; } }
-
-    /* Floating Orbs */
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-40px) rotate(8deg); }
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.2;
-      animation: float 10s ease-in-out infinite;
-    }
-    .orb-1 { width: 500px; height: 500px; background: #0EA5E9; top: -150px; left: -150px; }
-    .orb-2 { width: 600px; height: 600px; background: #06B6D4; bottom: -200px; right: -200px; animation-delay: -5s; }
-
-    /* Fade Up */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Toggle Switch */
-    .toggle-checkbox:checked ~ .toggle-label .toggle-ball {
-      transform: translateX(28px);
+    /* Toggle */
+    .toggle-checkbox:checked + .toggle-label .toggle-ball {
+      transform: translateX(22px);
     }
     .toggle-ball {
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s ease;
     }
   </style>
 </head>
 
-<body data-theme="dark" class="min-h-screen relative overflow-x-hidden">
+<body data-theme="dark" class="min-h-screen">
 
-  <!-- Dark/Light Toggle -->
-  <div class="fixed top-6 right-6 z-50 flex items-center gap-3 glass-card px-4 py-2 rounded-full shadow-lg">
-    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707z"/></svg>
-    <label class="relative inline-flex items-center cursor-pointer">
-      <input type="checkbox" class="sr-only toggle-checkbox" id="theme-toggle">
-      <span class="toggle-label w-14 h-7 bg-gray-600 rounded-full shadow-inner"></span>
-      <span class="toggle-ball absolute top-1 left-1 w-5 h-5 bg-white rounded-full shadow"></span>
+  <!-- Theme Toggle -->
+  <div class="fixed top-4 right-4 z-50">
+    <label class="flex items-center cursor-pointer">
+      <input type="checkbox" id="theme-toggle" class="sr-only toggle-checkbox">
+      <div class="toggle-label relative w-12 h-6 bg-gray-600 rounded-full shadow-inner">
+        <div class="toggle-ball absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow"></div>
+      </div>
+      <svg class="w-5 h-5 ml-2 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 15a5 5 0 100-10 5 5 0 000 10zm0-7a2 2 0 110 4 2 2 0 010-4zm0 8a7 7 0 100-14 7 7 0 000 14z"/></svg>
     </label>
-    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
   </div>
 
-  <!-- Floating Orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-
-  <!-- ==================== HERO ==================== -->
-  <header class="relative min-h-screen flex items-center justify-center px-6 text-center">
-    <div class="relative z-10 max-w-5xl mx-auto">
+  <!-- Hero -->
+  <header class="relative min-h-screen flex items-center justify-center px-4 py-12 text-center">
+    <div class="max-w-4xl mx-auto">
       <img src="https://vefugbjqwgyrozkghjwm.supabase.co/storage/v1/object/public/expense_images/avatar_3cf67ab6-24c4-4591-8f24-bdf6a4e27add_1759290575580.jpg"
-           alt="Abhay Kumar Upadhyay"
-           class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full ring-4 ring-primary/50 shadow-2xl mb-6">
-
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4">
+           alt="Abhay"
+           class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full ring-4 ring-primary/50 shadow-xl mb-4">
+      <h1 class="text-4xl md:text-6xl font-bold mb-2">
         Hi, I'm <span class="gradient-text">Abhay</span>
       </h1>
-      <h2 class="text-2xl md:text-4xl font-bold mb-6">
-        <span class="typewriter">Full-Stack Engineer &amp; System Architect</span>
-      </h2>
-      <p class="text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mb-8">
-        Crafting <span class="text-primary font-bold">high-performance</span>, 
-        <span class="text-accent font-bold">scalable</span> solutions with .NET Core, 
-        Microservices, and Cloud-Native stacks.
+      <h2 class="text-xl md:text-3xl font-semibold mb-3">Full-Stack Engineer</h2>
+      <p class="text-sm md:text-base max-w-2xl mx-auto mb-6">
+        Building <span class="font-bold text-primary">scalable .NET APIs</span>, 
+        <span class="font-bold text-accent">microservices</span>, and 
+        <span class="font-bold text-primary">cloud-native</span> systems.
       </p>
-
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <a href="https://github.com/abhayupadhyaydev" target="_blank"
-           class="px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition">
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank"
-           class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition">
-          LinkedIn
-        </a>
-        <a href="mailto:abhayupadhyay503@gmail.com"
-           class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white font-semibold rounded-xl shadow-lg transition">
-          Let’s Talk
-        </a>
+      <div class="flex flex-wrap justify-center gap-3 mb-6">
+        <a href="https://github.com/abhayupadhyaydev" target="_blank" class="px-5 py-2 bg-primary text-white rounded-lg font-medium hover:bg-sky-600 transition">GitHub</a>
+        <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank" class="px-5 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-lg font-medium hover:bg-white/20 transition">LinkedIn</a>
+        <a href="mailto:abhayupadhyay503@gmail.com" class="px-5 py-2 bg-gradient-to-r from-cyan-500 to-primary text-white rounded-lg font-medium hover:from-cyan-600 transition">Contact</a>
       </div>
-
-      <div class="inline-flex items-center gap-2 px-5 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">
-        Open to Full-Stack / Backend Roles
+      <div class="inline-block px-4 py-1 bg-green-500/20 text-green-300 rounded-full text-xs font-medium">
+        Open to Backend / Full-Stack Roles
       </div>
     </div>
   </header>
 
-  <!-- ==================== ABOUT ==================== -->
-  <section id="about" class="py-20 px-6">
+  <!-- About -->
+  <section class="py-12 px-4">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-5xl font-bold gradient-text mb-6 animate-fadeUp">About Me</h2>
-      <p class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto animate-fadeUp" style="animation-delay:0.2s">
-        Full-Stack Engineer with <strong class="text-primary">2+ years</strong> building production-grade systems for
-        <span class="text-cyan-400">e-commerce, travel, government, logistics, and fintech</span>.
-        I design <strong class="text-white">clean, testable APIs</strong> and deploy
-        <strong class="text-primary">cloud-native microservices</strong> that handle millions in transactions.
+      <h2 class="text-2xl md:text-4xl font-bold gradient-text mb-4">About Me</h2>
+      <p class="text-sm md:text-base max-w-3xl mx-auto">
+        2+ years building production systems for <strong>e-commerce, travel, govtech, logistics</strong>. 
+        Expert in <strong>.NET Core, C#, SQL, AWS, Redis, Microservices</strong>.
       </p>
     </div>
   </section>
 
-  <!-- ==================== SKILLS ==================== -->
-  <section id="skills" class="py-20 px-6">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-12 animate-fadeUp">Core Expertise</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0s">.NET Core</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.1s">C#</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.2s">ASP.NET API</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.3s">SQL Server</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.4s">AWS</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.5s">Redis</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.6s">Supabase</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.7s">Microservices</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.8s">RESTful APIs</div>
-        <div class="glass-card p-4 rounded-2xl text-center font-semibold text-xs md:text-sm animate-fadeUp" style="animation-delay:0.9s">System Design</div>
+  <!-- Skills -->
+  <section class="py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-4xl font-bold text-center gradient-text mb-8">Skills</h2>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">.NET Core</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">C#</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">ASP.NET API</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">SQL Server</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">AWS</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">Redis</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">Supabase</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">Microservices</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">REST APIs</div>
+        <div class="glass-card p-3 rounded-lg text-center text-xs font-medium">System Design</div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== SERVICES ==================== -->
-  <section id="services" class="py-20 px-6 bg-slate-800/30">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-12 animate-fadeUp">Services</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Service 1 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.3s">
-          <h3 class="text-xl font-bold text-primary mb-3">Backend Development</h3>
-          <p class="text-sm leading-relaxed mb-4">High-performance APIs with .NET Core, C#, SQL Server, Redis, and AWS. Scalable, secure, and production-ready.</p>
-          <ul class="text-xs space-y-1">
-            <li>Microservices Architecture</li>
-            <li>RESTful API Design</li>
-            <li>Database Optimization</li>
-          </ul>
+  <!-- Services -->
+  <section class="py-12 px-4 bg-slate-800/20">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-4xl font-bold text-center gradient-text mb-8">Services</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-lg font-bold text-primary mb-2">Backend Development</h3>
+          <p class="text-xs mb-2">Scalable .NET APIs, microservices, SQL optimization</p>
+          <ul class="text-xs space-y-1"><li>Microservices</li><li>REST APIs</li><li>Database Tuning</li></ul>
         </div>
-
-        <!-- Service 2 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.4s">
-          <h3 class="text-xl font-bold text-primary mb-3">Cloud & DevOps</h3>
-          <p class="text-sm leading-relaxed mb-4">Deploy and scale applications on AWS with CI/CD, Docker, and infrastructure as code.</p>
-          <ul class="text-xs space-y-1">
-            <li>AWS (EC2, Lambda, RDS)</li>
-            <li>CI/CD Pipelines</li>
-            <li>Auto-scaling</li>
-          </ul>
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-lg font-bold text-primary mb-2">Cloud & DevOps</h3>
+          <p class="text-xs mb-2">AWS deployment, CI/CD, Docker, auto-scaling</p>
+          <ul class="text-xs space-y-1"><li>EC2, Lambda</li><li>CI/CD</li><li>Auto-scale</li></ul>
         </div>
-
-        <!-- Service 3 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.5s">
-          <h3 class="text-xl font-bold text-primary mb-3">Full-Stack Solutions</h3>
-          <p class="text-sm leading-relaxed mb-4">End-to-end systems from database to UI using Flutter, Supabase, and .NET.</p>
-          <ul class="text-xs space-y-1">
-            <li>Cross-platform Apps</li>
-            <li>Real-time Sync</li>
-            <li>Admin Dashboards</li>
-          </ul>
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-lg font-bold text-primary mb-2">Full-Stack Apps</h3>
+          <p class="text-xs mb-2">Flutter + Supabase + .NET backend</p>
+          <ul class="text-xs space-y-1"><li>Cross-platform</li><li>Real-time</li><li>Dashboards</li></ul>
         </div>
-
-        <!-- Service 4 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.6s">
-          <h3 class="text-xl font-bold text-primary mb-3">System Modernization</h3>
-          <p class="text-sm leading-relaxed mb-4">Upgrade legacy systems with clean architecture, performance gains, and cloud migration.</p>
-          <ul class="text-xs space-y-1">
-            <li>Code Refactoring</li>
-            <li>Performance Tuning</li>
-            <li>Cloud Migration</li>
-          </ul>
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-lg font-bold text-primary mb-2">System Modernization</h3>
+          <p class="text-xs mb-2">Legacy to cloud, performance boost</p>
+          <ul class="text-xs space-y-1"><li>Refactor</li><li>Speed</li><li>Migration</li></ul>
         </div>
-
-        <!-- Service 5 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.7s">
-          <h3 class="text-xl font-bold text-primary mb-3">API Integration</h3>
-          <p class="text-sm leading-relaxed mb-4">Seamless integration with payment gateways, third-party APIs, and real-time services.</p>
-          <ul class="text-xs space-y-1">
-            <li>Payment Gateways</li>
-            <li>Travel APIs</li>
-            <li>Real-time Sync</li>
-          </ul>
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-lg font-bold text-primary mb-2">API Integration</h3>
+          <p class="text-xs mb-2">Payments, travel APIs, real-time sync</p>
+          <ul class="text-xs space-y-1"><li>Stripe</li><li>Travel APIs</li><li>Webhooks</li></ul>
         </div>
-
-        <!-- Service 6 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.8s">
-          <h3 class="text-xl font-bold text-primary mb-3">Consulting</h3>
-          <p class="text-sm leading-relaxed mb-4">Architecture planning, code reviews, and team training for scalable systems.</p>
-          <ul class="text-xs space-y-1">
-            <li>System Design</li>
-            <li>Code Reviews</li>
-            <li>Team Guidance</li>
-          </ul>
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-lg font-bold text-primary mb-2">Consulting</h3>
+          <p class="text-xs mb-2">Architecture, code review, training</p>
+          <ul class="text-xs space-y-1"><li>Design</li><li>Review</li><li>Training</li></ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PROJECTS ==================== -->
-  <section id="projects" class="py-20 px-6">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-12 animate-fadeUp">Production &amp; Personal Systems</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Project 1 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">CheapFareMart Car Booking</h3>
-            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Live</span>
+  <!-- Projects -->
+  <section class="py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-4xl font-bold text-center gradient-text mb-8">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">CheapFareMart Cars</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Live</</span>
           </div>
-          <p class="text-xs leading-relaxed">Led full-stack development of a high-throughput car-rental platform with real-time inventory and secure payments.</p>
-          <a href="https://www.cheapfaremart.com/cars" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">View Live</a>
+          <p class="text-xs mb-2">High-throughput car rental with real-time inventory</p>
+          <a href="https://www.cheapfaremart.com/cars" target="_blank" class="text-primary text-xs font-medium hover:text-accent">View</a>
         </div>
-
-        <!-- Repeat for all 8 projects with same structure -->
-        <!-- Project 2 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.1s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">Flight Booking API Engine</h3>
-            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Live</span>
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">Flight API Engine</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Live</span>
           </div>
-          <p class="text-xs leading-relaxed">Engineered RESTful APIs handling 10K+ req/min with JWT, Redis caching, and distributed transactions.</p>
-          <a href="https://www.cheapfaremart.com" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">Explore</a>
+          <p class="text-xs mb-2">10K+ req/min with JWT, Redis, caching</p>
+          <a href="https://www.cheapfaremart.com" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Explore</a>
         </div>
-
-        <!-- Project 3 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.2s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">INBiz &amp; BSD Modernization</h3>
-            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full">GovTech</span>
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">INBiz Modernization</h3>
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">Gov</span>
           </div>
-          <p class="text-xs leading-relaxed">Boosted Indiana State’s portal – 40% backend speed gain via clean architecture and SQL optimization.</p>
-          <a href="https://inbiz.in.gov/" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">Visit</a>
+          <p class="text-xs mb-2">40% speed gain via clean architecture</p>
+          <a href="https://inbiz.in.gov/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Visit</a>
         </div>
-
-        <!-- Project 4 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.3s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">Samrat Hardware ERP</h3>
-            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">E-Commerce</span>
+        <!-- Add remaining 5 projects same format -->
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">Samrat ERP</h3>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">E-Com</span>
           </div>
-          <p class="text-xs leading-relaxed">Full-featured inventory + order system with payment gateway and analytics dashboard.</p>
-          <a href="http://samratsanitary.org/" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">Live Demo</a>
+          <p class="text-xs mb-2">Inventory + payments + analytics</p>
+          <a href="http://samratsanitary.org/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Demo</a>
         </div>
-
-        <!-- Project 5 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.4s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">Dairy Management API</h3>
-            <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded-full">Company</span>
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">Dairy API</h3>
+            <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Company</span>
           </div>
-          <p class="text-xs leading-relaxed">Scalable .NET Core API for milk collection, quality checks, and real-time reporting.</p>
-          <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">API Docs</a>
+          <p class="text-xs mb-2">Milk collection + farmer payouts</p>
+          <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Docs</a>
         </div>
-
-        <!-- Project 6 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.5s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">Rent Management System</h3>
-            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full">Company</span>
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">Rent Manager</h3>
+            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">Company</span>
           </div>
-          <p class="text-xs leading-relaxed">Multi-tenant rent portal with automated invoicing and tenant dashboards.</p>
-          <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">Preview</a>
+          <p class="text-xs mb-2">Multi-tenant invoicing system</p>
+          <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Preview</a>
         </div>
-
-        <!-- Project 7 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.6s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">Expense Manager</h3>
-            <span class="text-xs bg-teal-500/20 text-teal-400 px-2 py-1 rounded-full">Personal</span>
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">Expense Manager</h3>
+            <span class="text-xs bg-teal-500/20 text-teal-400 px-2 py-1 rounded">Personal</span>
           </div>
-          <p class="text-xs leading-relaxed">Flutter + Supabase app with OCR receipt scanning and visual analytics.</p>
-          <a href="https://expense.abhayupadhyay.dev" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">Web Demo</a>
+          <p class="text-xs mb-2">Flutter + OCR + analytics</p>
+          <a href="https://expense.abhayupadhyay.dev" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Web</a>
         </div>
-
-        <!-- Project 8 -->
-        <div class="glass-card p-6 animate-fadeUp" style="animation-delay:0.7s">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-lg font-bold">Task Manager</h3>
-            <span class="text-xs bg-pink-500/20 text-pink-400 px-2 py-1 rounded-full">Personal</span>
+        <div class="glass-card p-5 rounded-xl">
+          <div class="flex justify-between mb-2">
+            <h3 class="font-bold text-sm">Task Manager</h3>
+            <span class="text-xs bg-pink-500/20 text-pink-400 px-2 py-1 rounded">Personal</span>
           </div>
-          <p class="text-xs leading-relaxed">Collaborative Kanban board with real-time sync and team permissions.</p>
-          <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="mt-4 inline-block text-primary text-sm font-medium hover:text-accent">Live App</a>
+          <p class="text-xs mb-2">Kanban with real-time sync</p>
+          <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="text-primary text-xs font-medium hover:text-accent">App</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== CONTACT ==================== -->
-  <section id="contact" class="py-20 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-5xl font-bold gradient-text mb-6 animate-fadeUp">Let's Work Together</h2>
-      <p class="text-base md:text-lg mb-8 animate-fadeUp" style="animation-delay:0.2s">
-        Ready to bring your ideas to life? Let's discuss your project.
-      </p>
-      <div class="glass-card p-8 max-w-2xl mx-auto animate-fadeUp" style="animation-delay:0.3s">
-        <h3 class="text-xl font-bold text-primary mb-6">Get In Touch</h3>
-        <div class="space-y-3 text-sm">
-          <p><strong>Email:</strong> <a href="mailto:abhayupadhyay503@gmail.com" class="text-primary hover:underline">abhayupadhyay503@gmail.com</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+919125957424" class="text-primary hover:underline">+91-9125957424</a></p>
-          <p><strong>Location:</strong> Somewhere in India</p>
-        </div>
+  <!-- Contact -->
+  <section class="py-12 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl md:text-4xl font-bold gradient-text mb-4">Let's Work Together</h2>
+      <div class="glass-card p-6 rounded-xl max-w-xl mx-auto">
+        <h3 class="text-lg font-bold text-primary mb-4">Get In Touch</h3>
+        <p class="text-xs mb-1"><strong>Email:</strong> <a href="mailto:abhayupadhyay503@gmail.com" class="text-primary hover:underline">abhayupadhyay503@gmail.com</a></p>
+        <p class="text-xs mb-1"><strong>Phone:</strong> <a href="tel:+919125957424" class="text-primary hover:underline">+91-9125957424</a></p>
+        <p class="text-xs"><strong>Location:</strong> India</p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="py-12 px-6 border-t border-white/10 text-center text-xs">
-    <p>© 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — Built with Tailwind CSS &amp; Passion</p>
+  <!-- Footer -->
+  <footer class="py-8 px-4 text-center text-xs border-t border-white/10">
+    <p>© 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — Built with Tailwind</p>
   </footer>
 
-  <!-- Theme Toggle Script -->
+  <!-- Toggle Script -->
   <script>
     const toggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
@@ -412,6 +297,7 @@
       html.setAttribute('data-theme', toggle.checked ? 'light' : 'dark');
     });
 
+    // Auto-detect
     if (window.matchMedia('(prefers-color-scheme: light)').matches) {
       toggle.checked = true;
       html.setAttribute('data-theme', 'light');
