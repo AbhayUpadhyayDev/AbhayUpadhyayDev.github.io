@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhay Kumar Upadhyay | Full-Stack Engineer & System Architect</title>
+  <title>Abhay Kumar Upadhyay | Full-Stack Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="https://vefugbjqwgyrozkghjwm.supabase.co/storage/v1/object/public/expense_images/avatar_3cf67ab6-24c4-4591-8f24-bdf6a4e27add_1759290575580.jpg" />
@@ -20,8 +20,8 @@
             light: '#F8FAFC'
           },
           animation: {
-            'fade-in': 'fadeIn 0.8s ease-out forwards',
-            'slide-up': 'slideUp 0.7s ease-out forwards',
+            'fade-in': 'fadeIn 1s ease-out forwards',
+            'slide-up': 'slideUp 0.8s ease-out forwards',
             'pulse-glow': 'pulseGlow 2s ease-in-out infinite'
           }
         }
@@ -33,22 +33,23 @@
     :root { scroll-behavior: smooth; }
     body {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-      color: #e2e8f0;
+      color: #f1f5f9;
       line-height: 1.7;
       font-size: 15px;
     }
     .glass-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(148, 163, 184, 0.15);
-      border-radius: 1rem;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 1.25rem;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+      overflow: hidden;
     }
     .glass-card:hover {
-      transform: translateY(-6px) scale(1.015);
-      box-shadow: 0 16px 48px rgba(14, 165, 233, 0.2);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(14, 165, 233, 0.2);
       border-color: rgba(14, 165, 233, 0.4);
     }
     .gradient-text {
@@ -59,143 +60,143 @@
       font-weight: 800;
     }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulseGlow {
       0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); }
+      50% { box-shadow: 0 0 45px rgba(14, 165, 233, 0.6); }
     }
-    .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
-    .animate-slide-up { animation: slideUp 0.7s ease-out forwards; }
+    .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+    .animate-slide-up { animation: slideUp 0.8s ease-out forwards; }
     .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
 
-    /* Floating particles - subtle */
+    /* Floating particles */
     .particle {
       position: absolute;
-      background: rgba(14, 165, 233, 0.08);
+      background: rgba(14, 165, 233, 0.1);
       border-radius: 50%;
       pointer-events: none;
-      animation: float 8s ease-in-out infinite;
+      animation: float 7s ease-in-out infinite;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-25px) rotate(180deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
     }
 
-    /* Compact spacing */
-    .section-gap { @apply py-12 md:py-16; }
-    .card-gap { @apply gap-5 md:gap-6; }
+    /* Section spacing */
+    .section-gap { @apply py-16 md:py-20; }
+    .card-gap { @apply gap-6 md:gap-8; }
     @media (max-width: 768px) {
-      body { font-size: 14.5px; }
-      .section-gap { @apply py-10; }
+      .section-gap { @apply py-12; }
+      .glass-card { margin: 0 1rem; }
     }
   </style>
 </head>
 <body class="min-h-screen relative overflow-x-hidden">
 
-  <!-- Subtle Particles -->
-  <div class="fixed inset-0 pointer-events-none z-0 opacity-50">
-    <div class="particle w-2 h-2 top-20 left-12" style="animation-delay: 0s;"></div>
-    <div class="particle w-1 h-1 top-32 right-16" style="animation-delay: 1.5s;"></div>
-    <div class="particle w-3 h-3 bottom-24 left-32" style="animation-delay: 3s;"></div>
-    <div class="particle w-2 h-2 top-48 right-8" style="animation-delay: 4.5s;"></div>
+  <!-- Floating Particles -->
+  <div class="fixed inset-0 pointer-events-none z-0 opacity-60">
+    <div class="particle w-2 h-2 top-24 left-16" style="animation-delay: 0s;"></div>
+    <div class="particle w-1 h-1 top-40 right-20" style="animation-delay: 1.2s;"></div>
+    <div class="particle w-3 h-3 bottom-32 left-40" style="animation-delay: 2.4s;"></div>
+    <div class="particle w-2 h-2 top-64 right-12" style="animation-delay: 3.6s;"></div>
   </div>
 
   <!-- Hero -->
-  <header class="relative z-10 min-h-screen flex items-center justify-center px-4 text-center section-gap">
+  <header class="relative z-10 min-h-screen flex items-center justify-center px-6 text-center section-gap">
     <div class="max-w-4xl mx-auto animate-fade-in">
       <img src="https://vefugbjqwgyrozkghjwm.supabase.co/storage/v1/object/public/expense_images/avatar_3cf67ab6-24c4-4591-8f24-bdf6a4e27add_1759290575580.jpg"
            alt="Abhay Kumar Upadhyay"
-           class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full ring-4 ring-primary/30 shadow-2xl mb-5 pulse-glow">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-2">
+           class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full ring-4 ring-primary/40 shadow-2xl mb-8 pulse-glow">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-4">
         Hi, I'm <span class="gradient-text">Abhay</span>
       </h1>
-      <h2 class="text-lg md:text-2xl font-semibold text-accent mb-3">Full-Stack Engineer & System Architect</h2>
-      <p class="text-sm md:text-base max-w-2xl mx-auto mb-5 leading-relaxed text-gray-300">
-        Building <span class="font-bold text-primary">scalable, high-performance</span> systems for e-commerce, travel, govtech, and fintech.
-        Expert in .NET Core, Microservices, AWS, and cloud-native architectures.
+      <h2 class="text-xl md:text-3xl font-semibold mb-5 text-accent">Full-Stack Engineer & System Architect</h2>
+      <p class="text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed text-gray-300">
+        Crafting <span class="font-bold text-primary">high-performance</span>, <span class="font-bold text-accent">scalable</span> systems 
+        for real-world impact in e-commerce, travel, govtech, and fintech.
       </p>
-      <div class="flex flex-wrap justify-center gap-3 mb-5">
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
         <a href="https://github.com/abhayupadhyaydev" target="_blank"
-           class="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium shadow-md transition-all">
+           class="px-7 py-3.5 bg-primary hover:bg-primary/90 text-white rounded-xl font-semibold shadow-lg transition-all duration-300">
           GitHub
         </a>
         <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank"
-           class="px-5 py-2.5 bg-white/10 hover:bg-white/15 backdrop-blur-sm text-white rounded-lg font-medium border border-white/20 transition-all">
+           class="px-7 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold border border-white/20 transition-all duration-300">
           LinkedIn
         </a>
         <a href="mailto:abhayupadhyay503@gmail.com"
-           class="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white rounded-lg font-medium shadow-md transition-all">
+           class="px-7 py-3.5 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white rounded-xl font-semibold shadow-lg transition-all duration-300">
           Let's Talk
         </a>
       </div>
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/20 text-green-300 rounded-full text-xs font-medium border border-green-500/30">
-        Open to Full-Stack & Backend Roles
+      <div class="inline-flex items-center gap-2 px-5 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium border border-green-500/30">
+        Open to Full-Stack & Backend Opportunities
       </div>
     </div>
   </header>
 
   <!-- About -->
-  <section class="section-gap px-4">
+  <section class="section-gap px-6">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center gradient-text mb-8 animate-slide-up">About Me</h2>
-      <div class="glass-card p-6 md:p-8 mb-8 animate-slide-up" style="animation-delay: 0.1s">
+      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-10 animate-slide-up">About Me</h2>
+      <div class="glass-card p-8 md:p-10 mb-10 animate-slide-up" style="animation-delay: 0.1s">
         <p class="text-sm md:text-base leading-relaxed text-center max-w-3xl mx-auto text-gray-200">
-          I architect <strong class="text-primary">robust, scalable systems</strong> that power mission-critical applications. 
-          With deep expertise in .NET Core, microservices, and AWS, I deliver clean APIs, optimized databases, and cloud-native solutions 
-          across e-commerce, travel, government, logistics, and fintech domains.
+          I design and build <strong class="text-primary">mission-critical, cloud-native systems</strong> that scale to 
+          <strong class="text-accent">10K+ requests/min</strong>. From real-time booking engines to secure fintech platforms, 
+          I deliver clean, testable, and performant code using .NET Core, AWS, and modern architectures.
         </p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 card-gap">
-        <div class="glass-card p-5 text-center animate-slide-up" style="animation-delay: 0.2s">
-          <h3 class="text-lg font-bold text-primary">2+ Years</h3>
-          <p class="text-xs text-gray-300 mt-1">Production Experience</p>
+        <div class="glass-card p-6 text-center animate-slide-up" style="animation-delay: 0.2s">
+          <h3 class="text-2xl font-bold text-primary mb-2">2+ Years</h3>
+          <p class="text-sm text-gray-300">Production Experience</p>
         </div>
-        <div class="glass-card p-5 text-center animate-slide-up" style="animation-delay: 0.3s">
-          <h3 class="text-lg font-bold text-accent">10K+ Req/min</h3>
-          <p class="text-xs text-gray-300 mt-1">High-Traffic Systems</p>
+        <div class="glass-card p-6 text-center animate-slide-up" style="animation-delay: 0.3s">
+          <h3 class="text-2xl font-bold text-accent mb-2">10K+ Req/min</h3>
+          <p class="text-sm text-gray-300">High-Traffic Systems</p>
         </div>
-        <div class="glass-card p-5 text-center animate-slide-up" style="animation-delay: 0.4s">
-          <h3 class="text-lg font-bold text-primary">40%+ Gains</h3>
-          <p class="text-xs text-gray-300 mt-1">Performance Optimized</p>
+        <div class="glass-card p-6 text-center animate-slide-up" style="animation-delay: 0.4s">
+          <h3 class="text-2xl font-bold text-primary mb-2">40%+ Gains</h3>
+          <p class="text-sm text-gray-300">Performance Optimized</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Skills -->
-  <section class="section-gap px-4 bg-black/20">
+  <section class="section-gap px-6 bg-black/20">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center gradient-text mb-8 animate-slide-up">Core Expertise</h2>
-      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 card-gap">
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0s">.NET Core</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.1s">C#</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.2s">ASP.NET</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.3s">SQL Server</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.4s">AWS</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.5s">Redis</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.6s">Supabase</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.7s">Microservices</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.8s">REST APIs</div>
-        <div class="glass-card p-3 text-center text-xs md:text-sm font-medium animate-slide-up" style="animation-delay: 0.9s">System Design</div>
+      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-12 animate-slide-up">Core Expertise</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 card-gap">
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0s">.NET Core</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.1s">C#</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.2s">ASP.NET</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.3s">SQL Server</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.4s">AWS</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.5s">Redis</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.6s">Supabase</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.7s">Microservices</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.8s">REST APIs</div>
+        <div class="glass-card p-5 text-center font-semibold text-sm md:text-base animate-slide-up" style="animation-delay: 0.9s">System Design</div>
       </div>
     </div>
   </section>
 
   <!-- Education & Certifications -->
-  <section class="section-gap px-4 bg-black/20">
+  <section class="section-gap px-6 bg-black/20">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center gradient-text mb-8 animate-slide-up">Education & Certifications</h2>
+      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-12 animate-slide-up">Education & Certifications</h2>
       <div class="grid md:grid-cols-2 card-gap">
-        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0s">
-          <h3 class="text-lg font-bold text-primary mb-2">BCA</h3>
-          <h4 class="text-accent font-medium mb-1">CSJM University</h4>
-          <p class="text-xs text-gray-300 mb-2">Software Engineering • Databases • Cloud Computing</p>
+        <div class="glass-card p-8 animate-slide-up" style="animation-delay: 0s">
+          <h3 class="text-xl font-bold text-primary mb-3">Bachelor of Computer Application</h3>
+          <h4 class="text-accent font-semibold mb-2">CSJM University</h4>
+          <p class="text-sm mb-3 text-gray-300">Software Engineering • Databases • Cloud Computing</p>
           <p class="text-xs text-gray-400">2024 – Present | GPA: 8.5/10</p>
         </div>
-        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.1s">
-          <h3 class="text-lg font-bold text-primary mb-2">Certifications</h3>
-          <ul class="text-xs space-y-1.5 text-gray-300">
-            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Full-Stack .NET Developer – KSS</li>
+        <div class="glass-card p-8 animate-slide-up" style="animation-delay: 0.1s">
+          <h3 class="text-xl font-bold text-primary mb-3">Certifications</h3>
+          <ul class="space-y-3 text-sm text-gray-300">
+            <li class="flex items-center gap-3"><span class="w-2 h-2 bg-green-500 rounded-full"></span>Full-Stack .NET Developer – KSS</li>
           </ul>
         </div>
       </div>
@@ -203,112 +204,105 @@
   </section>
 
   <!-- Projects -->
-  <section class="section-gap px-4">
+  <section class="section-gap px-6">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center gradient-text mb-8 animate-slide-up">Featured Projects</h2>
+      <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text mb-12 animate-slide-up">Featured Projects</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 card-gap">
-        <!-- Project 1 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">CheapFareMart Car Booking</h3>
-            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">Live</span>
+        <!-- All 8 Projects -->
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">CheapFareMart Car Booking</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full">Live</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Full-stack car rental platform with real-time inventory, payments, and API orchestration.</p>
-          <a href="https://www.cheapfaremart.com/cars" target="_blank" class="text-primary text-xs font-medium hover:text-accent">View Live →</a>
+          <p class="text-sm mb-4 text-gray-300">Real-time inventory, payment gateway, and API orchestration.</p>
+          <a href="https://www.cheapfaremart.com/cars" target="_blank" class="text-primary font-medium hover:text-accent text-sm">View Live</a>
         </div>
 
-        <!-- Project 2 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.1s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">Flight Booking Engine</h3>
-            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">Live</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.1s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">Flight Booking Engine</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full">Live</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Global flight API handling 10K+ req/min with caching and distributed transactions.</p>
-          <a href="https://www.cheapfaremart.com" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Explore →</a>
+          <p class="text-sm mb-4 text-gray-300">Handles 10K+ req/min with Redis caching & distributed locks.</p>
+          <a href="https://www.cheapfaremart.com" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Explore</a>
         </div>
 
-        <!-- Project 3 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.2s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">INBiz Portal Modernization</h3>
-            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">GovTech</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.2s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">INBiz Portal</h3>
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full">GovTech</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Optimized Indiana business licensing portal for 40% backend speed improvement.</p>
-          <a href="https://inbiz.in.gov/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Visit →</a>
+          <p class="text-sm mb-4 text-gray-300">40% backend speed boost via query optimization & indexing.</p>
+          <a href="https://inbiz.in.gov/" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Visit</a>
         </div>
 
-        <!-- Project 4 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.3s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">Samrat Hardware ERP</h3>
-            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">E-Commerce</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.3s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">Samrat Hardware ERP</h3>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded-full">E-Commerce</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Inventory, orders, payments, and analytics dashboard for hardware retail.</p>
-          <a href="http://samratsanitary.org/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Demo →</a>
+          <p class="text-sm mb-4 text-gray-300">Inventory, billing, and analytics for retail hardware.</p>
+          <a href="http://samratsanitary.org/" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Demo</a>
         </div>
 
-        <!-- Project 5 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.4s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">Dairy Management API</h3>
-            <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded-full">Logistics</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.4s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">Dairy Management API</h3>
+            <span class="text-xs bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded-full">Logistics</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Scalable API for milk collection, quality checks, and farmer payouts.</p>
-          <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Docs →</a>
+          <p class="text-sm mb-4 text-gray-300">Milk collection, quality checks, and farmer payouts.</p>
+          <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Docs</a>
         </div>
 
-        <!-- Project 6 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.5s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">Rent Management System</h3>
-            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full">Fintech</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.5s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">Rent Management System</h3>
+            <span class="text-xs bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-full">Fintech</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Multi-tenant portal with automated invoicing and tenant dashboards.</p>
-          <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Preview →</a>
+          <p class="text-sm mb-4 text-gray-300">Multi-tenant invoicing and tenant dashboards.</p>
+          <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Preview</a>
         </div>
 
-        <!-- Project 7 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.6s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">Expense Manager App</h3>
-            <span class="text-xs bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded-full">Personal</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.6s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">Expense Manager App</h3>
+            <span class="text-xs bg-teal-500/20 text-teal-400 px-2.5 py-1 rounded-full">Personal</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Flutter app with OCR receipts, budget tracking, and Supabase backend.</p>
-          <a href="https://expense.abhayupadhyay.dev" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Demo →</a>
+          <p class="text-sm mb-4 text-gray-300">Flutter + Supabase with OCR receipt scanning.</p>
+          <a href="https://expense.abhayupadhyay.dev" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Demo</a>
         </div>
 
-        <!-- Project 8 -->
-        <div class="glass-card p-5 animate-slide-up" style="animation-delay: 0.7s">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-sm">Task Manager Board</h3>
-            <span class="text-xs bg-pink-500/20 text-pink-400 px-2 py-0.5 rounded-full">Personal</span>
+        <div class="glass-card p-6 animate-slide-up" style="animation-delay: 0.7s">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-bold text-base">Task Manager Board</h3>
+            <span class="text-xs bg-pink-500/20 text-pink-400 px-2.5 py-1 rounded-full">Personal</span>
           </div>
-          <p class="text-xs text-gray-300 mb-3">Collaborative Kanban with real-time sync and team permissions.</p>
-          <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="text-primary text-xs font-medium hover:text-accent">Live →</a>
+          <p class="text-sm mb-4 text-gray-300">Real-time Kanban with team sync and permissions.</p>
+          <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="text-primary font-medium hover:text-accent text-sm">Live</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section class="section-gap px-4">
+  <section class="section-gap px-6">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6 animate-slide-up">Let's Build Together</h2>
-      <p class="text-sm md:text-base mb-6 max-w-xl mx-auto text-gray-300 animate-slide-up" style="animation-delay: 0.1s">
-        Open to full-time, freelance, or consulting opportunities in backend, full-stack, or system design.
+      <h2 class="text-3xl md:text-5xl font-bold gradient-text mb-8 animate-slide-up">Let's Collaborate</h2>
+      <p class="text-sm md:text-base mb-10 max-w-2xl mx-auto text-gray-300 animate-slide-up" style="animation-delay: 0.1s">
+        Ready to build scalable, high-impact systems? Let's talk.
       </p>
-      <div class="glass-card p-6 max-w-md mx-auto animate-slide-up" style="animation-delay: 0.2s">
-        <a href="mailto:abhayupadhyay503@gmail.com" class="block w-full py-3 bg-gradient-to-r from-primary to-accent text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all">
+      <div class="glass-card p-10 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 0.2s">
+        <a href="mailto:abhayupadhyay503@gmail.com" class="block w-full py-4 bg-gradient-to-r from-primary to-accent text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
           Email Me
         </a>
-        <p class="text-xs text-gray-400 mt-3">Lucknow, India • Available Immediately</p>
+        <p class="text-xs text-gray-400 mt-5">Lucknow, India • Available for Full-Time & Freelance</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-8 px-4 text-center text-xs border-t border-white/10 bg-black/20 text-gray-400">
-    <p>© 2025 <span class="text-primary font-medium">Abhay Kumar Upadhyay</span> — Built with precision</p>
+  <footer class="py-12 px-6 text-center text-xs border-t border-white/10 bg-black/20 text-gray-400">
+    <p>© 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — Built with passion</p>
   </footer>
 
 </body>
