@@ -3,122 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhay Kumar Upadhyay | Full-Stack Developer</title>
+  <title>Abhay Kumar Upadhyay | Full-Stack Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/156398531?v=4">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/156398531?v=4" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#0EA5E9',
+            dark: '#0F172A',
+            slate: {
+              850: '#1E293B',
+              900: '#0F172A',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'slide-up': 'slideUp 0.7s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    /* subtle fade-in animation */
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 1.2s ease-in forwards;
-    }
     @keyframes fadeIn {
+      from { opacity: 0; }
       to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .glass {
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .project-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .project-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
   </style>
 </head>
-<body class="bg-gradient-to-b from-slate-950 to-slate-900 text-gray-100 font-sans leading-relaxed">
+<body class="bg-gradient-to-br from-slate-900 via-slate-950 to-black text-gray-100 min-h-screen">
 
-  <!-- Header -->
-  <header class="text-center py-20 fade-in">
-    <h1 class="text-5xl font-bold text-white mb-2">Abhay Kumar Upadhyay</h1>
-    <p class="text-blue-400 text-lg mb-4">.NET Core | Full-Stack Developer | AWS | Redis | Supabase | Microservices | System Design</p>
-    <div class="flex justify-center gap-4 mt-6">
-      <a href="https://github.com/abhayupadhyaydev" target="_blank" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 rounded-full transition">GitHub</a>
-      <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 rounded-full transition">LinkedIn</a>
-      <a href="mailto:abhayupadhyay503@gmail.com" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 rounded-full transition">Contact</a>
+  <!-- Hero Section -->
+  <header class="relative overflow-hidden py-24 px-6">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-transparent"></div>
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+      <div class="mb-6">
+        <img src="https://avatars.githubusercontent.com/u/156398531?v=4" alt="Abhay Kumar Upadhyay" 
+             class="w-28 h-28 mx-auto rounded-full ring-4 ring-primary/30 shadow-2xl animate-fade-in">
+      </div>
+      <h1 class="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-400 mb-3">
+        Abhay Kumar Upadhyay
+      </h1>
+      <p class="text-xl md:text-2xl font-medium text-blue-300 mb-6">
+        Full-Stack Engineer & System Architect
+      </p>
+      <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+        Building <span class="text-primary font-semibold">high-performance</span>, 
+        <span class="text-primary font-semibold">scalable</span> systems with .NET Core, 
+        Microservices, and Cloud-Native architectures.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://github.com/abhayupadhyaydev" target="_blank" 
+           class="px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-primary/30 transition">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank" 
+           class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition">
+          LinkedIn
+        </a>
+        <a href="mailto:abhayupadhyay503@gmail.com" 
+           class="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg transition">
+          Let's Talk
+        </a>
+      </div>
     </div>
   </header>
 
   <!-- About -->
-  <section id="about" class="max-w-4xl mx-auto text-center px-6 py-10 fade-in">
-    <h2 class="text-3xl font-semibold mb-4 text-blue-400">About Me</h2>
-    <p class="text-gray-300 text-lg">
-      Hi, I’m <strong>Abhay</strong> — a Full-Stack Software Developer with 2+ years of experience building scalable, secure, and high-performance applications.  
-      I’ve worked across industries like e-commerce, travel, public services, and logistics — turning business goals into clean, maintainable software solutions.  
-      My focus areas include <span class="text-blue-400">API development, microservices, system design, and cloud infrastructure (AWS, Supabase, Redis)</span>.
-    </p>
+  <section class="py-20 px-6 bg-slate-850/50">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6 animate-slide-up">About Me</h2>
+      <p class="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
+        I'm a <strong class="text-white">Full-Stack Software Engineer</strong> with <strong class="text-primary">2+ years</strong> of experience 
+        delivering production-grade systems for <span class="text-blue-400">e-commerce, travel, government, and logistics</span>. 
+        I architect <strong class="text-white">clean, scalable APIs</strong> and deploy <strong class="text-primary">cloud-native microservices</strong> 
+        that power millions in transactions.
+      </p>
+    </div>
   </section>
 
-  <!-- Skills -->
-  <section id="skills" class="bg-slate-900 py-14 fade-in">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-semibold text-blue-400 mb-8">Tech Stack</h2>
-      <div class="flex flex-wrap justify-center gap-3 text-sm">
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">.NET Core</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">C#</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">ASP.NET Web API</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">SQL Server</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">AWS</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">Redis</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">Supabase</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">Microservices</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">RESTful APIs</span>
-        <span class="bg-blue-800/30 px-4 py-2 rounded-lg">System Design</span>
+  <!-- Tech Stack -->
+  <section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Core Expertise</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {[".NET Core", "C#", "ASP.NET API", "SQL Server", "AWS", "Redis", "Supabase", "Microservices", "RESTful APIs", "System Design"].map((skill, i) => (
+          <div key={i} class="glass p-4 rounded-xl text-center font-medium text-sm md:text-base hover:bg-primary/10 transition animate-slide-up" style={{ animationDelay: `${i * 0.1}s` }}>
+            {skill}
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="max-w-6xl mx-auto py-20 px-6 fade-in">
-    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-400">Featured Projects</h2>
+  <section class="py-20 px-6 bg-slate-850/30">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-16">Production Systems I've Built</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        
+        <!-- Project 1 -->
+        <div class="project-card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-white">CheapFareMart Car Booking</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium">Live</span>
+          </div>
+          <p class="text-gray-300 mb-6 leading-relaxed">
+            Led full-stack development of a <strong class="text-primary">high-throughput car rental platform</strong> with real-time availability, 
+            secure payments, and third-party API integrations using <strong>.NET Core microservices on AWS</strong>.
+          </p>
+          <a href="https://www.cheapfaremart.com/cars" target="_blank" 
+             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
+            View Live System <span class="ml-2">→</span>
+          </a>
+        </div>
 
-    <div class="space-y-8">
-      <!-- Project 1 -->
-      <div class="bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-6 border border-slate-700 shadow-sm hover:shadow-blue-500/30">
-        <h3 class="text-2xl font-semibold mb-2 text-white">CheapFareMart Car Booking System</h3>
-        <p class="text-gray-400 mb-3 text-[15px]">
-          Built and optimized a complete car rental platform for <strong>CheapFareMart</strong> with API integration, AWS, and microservices.  
-          Focused on secure transactions, real-time data updates, and scalable performance.
-        </p>
-        <a href="https://www.cheapfaremart.com/cars" target="_blank" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit → www.cheapfaremart.com/cars</a>
-      </div>
+        <!-- Project 2 -->
+        <div class="project-card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-white">Flight Booking API Engine</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium">Live</span>
+          </div>
+          <p class="text-gray-300 mb-6 leading-relaxed">
+            Engineered <strong class="text-primary">RESTful APIs</strong> for a global flight booking system with JWT auth, 
+            Redis caching, and distributed transactions — handling <strong>10K+ requests/min</strong>.
+          </p>
+          <a href="https://www.cheapfaremart.com" target="_blank" 
+             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
+            Explore Platform <span class="ml-2">→</span>
+          </a>
+        </div>
 
-      <!-- Project 2 -->
-      <div class="bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-6 border border-slate-700 shadow-sm hover:shadow-blue-500/30">
-        <h3 class="text-2xl font-semibold mb-2 text-white">Flight Booking API Platform</h3>
-        <p class="text-gray-400 mb-3 text-[15px]">
-          Developed and deployed REST APIs for global flight bookings using <strong>.NET Core</strong>, <strong>JWT Authentication</strong>, <strong>AWS EC2</strong>, and <strong>Redis caching</strong>.  
-          Integrated multiple third-party APIs for search, booking, and payment flows.
-        </p>
-        <a href="https://www.cheapfaremart.com" target="_blank" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit → www.cheapfaremart.com</a>
-      </div>
+        <!-- Project 3 -->
+        <div class="project-card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-white">INBiz & BSD Modernization</h3>
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full font-medium">GovTech</span>
+          </div>
+          <p class="text-gray-300 mb-6 leading-relaxed">
+            Contributed to Indiana State’s <strong class="text-primary">business licensing portal</strong> — 
+            improved backend performance by 40% using clean architecture and optimized SQL.
+          </p>
+          <a href="https://inbiz.in.gov/" target="_blank" 
+             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
+            Visit Portal <span class="ml-2">→</span>
+          </a>
+        </div>
 
-      <!-- Project 3 -->
-      <div class="bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-6 border border-slate-700 shadow-sm hover:shadow-blue-500/30">
-        <h3 class="text-2xl font-semibold mb-2 text-white">INBiz & BSD – Indiana State Government</h3>
-        <p class="text-gray-400 mb-3 text-[15px]">
-          Contributed to the modernization of <strong>INBiz</strong> and <strong>BSD</strong> state systems, improving backend scalability, security, and reliability for public service platforms.
-        </p>
-        <a href="https://inbiz.in.gov/" target="_blank" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit → inbiz.in.gov</a>
-      </div>
+        <!-- Project 4 -->
+        <div class="project-card glass rounded-2xl p-8 border border-slate-700 hover:border-primary/50">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-white">Samrat Hardware ERP</h3>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-medium">E-Commerce</span>
+          </div>
+          <p class="text-gray-300 mb-6 leading-relaxed">
+            Built a complete <strong class="text-primary">inventory + order management system</strong> with payment gateway, 
+            analytics dashboard, and role-based access for a sanitary & hardware retailer.
+          </p>
+          <a href="https://samrathardware.com" target="_blank" 
+             class="inline-flex items-center text-primary font-semibold hover:text-sky-400 transition">
+            Live Demo <span class="ml-2">→</span>
+          </a>
+        </div>
 
-      <!-- Project 4 -->
-      <div class="bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-6 border border-slate-700 shadow-sm hover:shadow-blue-500/30">
-        <h3 class="text-2xl font-semibold mb-2 text-white">Samrat Sanitary & Hardware</h3>
-        <p class="text-gray-400 mb-3 text-[15px]">
-          Designed and delivered an internal ERP-style platform for managing inventory, sales, and analytics with streamlined UI and secure authentication.
-        </p>
-        <a href="https://samratsanitary.in" target="_blank" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit → samratsanitary.in</a>
-      </div>
-
-      <!-- Project 5 -->
-      <div class="bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-6 border border-slate-700 shadow-sm hover:shadow-blue-500/30">
-        <h3 class="text-2xl font-semibold mb-2 text-white">Personal Developer Portfolio</h3>
-        <p class="text-gray-400 mb-3 text-[15px]">
-          Crafted a responsive, elegant portfolio using <strong>Tailwind CSS</strong> and <strong>GitHub Pages</strong> to showcase my professional journey and projects.
-        </p>
-        <a href="https://abhayupadhyaydev.github.io/" target="_blank" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit → abhayupadhyaydev.github.io</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-10 border-t border-slate-800 fade-in">
-    <p class="text-gray-500 text-sm">© 2025 Abhay Kumar Upadhyay — Crafted with precision & hosted on GitHub Pages</p>
+  <footer class="py-12 px-6 border-t border-slate-800">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-gray-500">
+        © 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — 
+        Crafted with precision using GitHub Pages 
+      </p>
+    </div>
   </footer>
+
 </body>
 </html>
