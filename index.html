@@ -34,24 +34,27 @@
     :root { scroll-behavior: smooth; }
 
     /* Glass & Neumorphic */
-    .glass { 
-      background: rgba(30,41,59,.55); 
-      backdrop-filter: blur(14px); 
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(148,163,184,.2); 
+    .glass {
+      background: rgba(30,41,59,.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(148,163,184,.25);
     }
     .neumorphic {
-      background: rgba(30,41,59,.55);
-      box-shadow: 
-        8px 8px 16px rgba(0,0,0,.25),
-        -8px -8px 16px rgba(255,255,255,.05);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(30,41,59,.6);
+      box-shadow:
+        10px 10px 20px rgba(0,0,0,.3),
+        -10px -10px 20px rgba(255,255,255,.05),
+        inset 0 0 10px rgba(14,165,233,.1);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 1.5rem;
     }
     .neumorphic:hover {
-      box-shadow: 
-        12px 12px 24px rgba(0,0,0,.3),
-        -12px -12px 24px rgba(255,255,255,.08);
-      transform: translateY(-8px);
+      box-shadow:
+        15px 15px 30px rgba(0,0,0,.4),
+        -15px -15px 30px rgba(255,255,255,.08),
+        inset 0 0 20px rgba(14,165,233,.2);
+      transform: translateY(-12px) scale(1.02);
     }
 
     /* Gradient Text */
@@ -62,52 +65,24 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Sticky Nav */
-    .sticky-nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    /* Mobile Menu (CSS-only) */
-    #mobile-toggle { display: none; }
-    #mobile-toggle:checked ~ .mobile-menu {
-      transform: translateX(0);
-    }
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100vh;
-      width: 280px;
-      background: rgba(15,23,42,.98);
-      backdrop-filter: blur(12px);
-      transform: translateX(100%);
-      transition: transform 0.4s ease;
-      padding: 6rem 2rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      z-index: 60;
-    }
-
     /* Staggered Fade-Up */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fadeUp {
-      animation: fadeUp 0.7s ease-out forwards;
+      animation: fadeUp 0.8s ease-out forwards;
     }
 
-    /* Letter-by-letter typing effect (CSS) */
+    /* Typewriter Effect */
     .typewriter {
       overflow: hidden;
       white-space: nowrap;
       border-right: 3px solid #0EA5E9;
-      animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+      animation: typing 4s steps(50, end), blink 0.75s step-end infinite;
       width: 0;
       animation-fill-mode: forwards;
+      display: inline-block;
     }
     @keyframes typing {
       from { width: 0 }
@@ -118,74 +93,40 @@
       50% { border-color: #0EA5E9 }
     }
 
-    /* Scroll indicator */
+    /* Scroll Hint */
     .scroll-hint {
       animation: bounce 2s infinite;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-12px); }
     }
 
-    /* Floating orb background */
+    /* Floating Orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.2;
-      animation: float 8s ease-in-out infinite;
+      filter: blur(90px);
+      opacity: 0.25;
+      animation: float 10s ease-in-out infinite;
     }
-    .orb-1 { width: 400px; height: 400px; background: #0EA5E9; top: -100px; left: -100px; }
-    .orb-2 { width: 500px; height: 500px; background: #06B6D4; bottom: -150px; right: -150px; animation-delay: -4s; }
+    .orb-1 { width: 450px; height: 450px; background: #0EA5E9; top: -120px; left: -120px; }
+    .orb-2 { width: 550px; height: 550px; background: #06B6D4; bottom: -180px; right: -180px; animation-delay: -5s; }
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-30px) rotate(5deg); }
+      50% { transform: translateY(-40px) rotate(8deg); }
+    }
+
+    /* Responsive Text */
+    @media (max-width: 640px) {
+      .typewriter { font-size: 1.125rem; }
+      h1 { font-size: 2.5rem; }
+      .btn { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
     }
   </style>
 </head>
 
 <body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-gray-100 min-h-screen">
-
-  <!-- ==================== NAV (Sticky + Mobile) ==================== -->
-  <nav class="sticky-nav glass border-b border-white/10">
-    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-      <a href="#" class="text-2xl font-bold gradient-text">AU</a>
-
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="#about" class="hover:text-primary transition">About</a>
-        <a href="#skills" class="hover:text-primary transition">Skills</a>
-        <a href="#projects" class="hover:text-primary transition">Projects</a>
-        <a href="#contact" class="hover:text-primary transition">Contact</a>
-      </div>
-
-      <!-- Mobile Menu Trigger -->
-      <label class="md:hidden cursor-pointer z-50">
-        <input type="checkbox" id="mobile-toggle" class="hidden">
-        <span class="block w-6 h-6 relative">
-          <span class="block absolute h-0.5 w-full bg-white transition-all duration-300 top-1" style="top: 4px;"></span>
-          <span class="block absolute h-0.5 w-full bg-white transition-all duration-300 top-1/2 -translate-y-1/2"></span>
-          <span class="block absolute h-0.5 w-full bg-white transition-all duration-300 bottom-1" style="bottom: 4px;"></span>
-        </span>
-      </label>
-    </div>
-
-    <!-- Mobile Menu (CSS-only) -->
-    <div class="mobile-menu">
-      <a href="#about" class="text-xl hover:text-primary transition">About</a>
-      <a href="#skills" class="text-xl hover:text-primary transition">Skills</a>
-      <a href="#projects" class="text-xl hover:text-primary transition">Projects</a>
-      <a href="#contact" class="text-xl hover:text-primary transition">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu Hamburger Animation -->
-  <style>
-    #mobile-toggle:checked ~ .mobile-menu { transform: translateX(0); }
-    #mobile-toggle:checked + label span:nth-child(1) { transform: rotate(45deg); top: 50%; }
-    #mobile-toggle:checked + label span:nth-child(2) { opacity: 0; }
-    #mobile-toggle:checked + label span:nth-child(3) { transform: rotate(-45deg); bottom: 50%; }
-  </style>
 
   <!-- ==================== HERO ==================== -->
   <header class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
@@ -194,43 +135,46 @@
     <div class="orb orb-2"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto text-center">
-      <img src="https://avatars.githubusercontent.com/u/156398531?v=4"
+      <!-- Profile Image -->
+      <img src="https://ibb.co/Kc4wqPvJ"
            alt="Abhay Kumar Upadhyay"
-           class="w-32 h-32 mx-auto rounded-full ring-4 ring-primary/40 shadow-2xl">
+           class="w-36 h-36 mx-auto rounded-full ring-4 ring-primary/50 shadow-2xl">
 
+      <!-- Name -->
       <h1 class="mt-8 text-5xl md:text-7xl font-extrabold gradient-text">
         Abhay Kumar Upadhyay
       </h1>
 
-      <!-- CSS Typewriter Effect -->
+      <!-- Typewriter Title -->
       <p class="mt-6 text-xl md:text-2xl font-medium text-cyan-300">
-        <span class="typewriter inline-block">Full-Stack Engineer &amp; System Architect</span>
+        <span class="typewriter">Full-Stack Engineer &amp; System Architect</span>
       </p>
 
-      <p class="mt-6 text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-        Crafting <span class="text-primary font-bold">high-performance</span>, 
-        <span class="text-accent font-bold">scalable</span> solutions with .NET Core, 
+      <!-- Description -->
+      <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Crafting <span class="text-primary font-bold">high-performance</span>,
+        <span class="text-accent font-bold">scalable</span> solutions with .NET Core,
         Microservices, and Cloud-Native stacks.
       </p>
 
       <!-- CTA Buttons -->
       <div class="mt-10 flex flex-wrap justify-center gap-4">
         <a href="https://github.com/abhayupadhyaydev" target="_blank"
-           class="px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
+           class="btn px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
           GitHub
         </a>
         <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank"
-           class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition flex items-center gap-2">
+           class="btn px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition flex items-center gap-2">
           LinkedIn
         </a>
         <a href="mailto:abhayupadhyay503@gmail.com"
-           class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
+           class="btn px-6 py-3 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
           Let’s Talk
         </a>
       </div>
 
       <!-- Open to Work Badge -->
-      <div class="mt-8 inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">
+      <div class="mt-8 inline-flex items-center gap-2 px-5 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">
         Open to Full-Stack / Backend Roles
       </div>
 
@@ -260,7 +204,7 @@
   <section id="skills" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-16 animate-fadeUp">Core Expertise</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
         <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0s">.NET Core</div>
         <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.1s">C#</div>
         <div class="glass neumorphic p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.2s">ASP.NET API</div>
@@ -279,84 +223,84 @@
   <section id="projects" class="py-24 px-6 bg-slate-850/30">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-16 animate-fadeUp">Production &amp; Personal Systems</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Project 1 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">CheapFareMart Car Booking</h3>
-            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium">Live</span>
+            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">Live</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Led full-stack development of a high-throughput car-rental platform – real-time inventory, secure payments, third-party API orchestration with .NET Core microservices on AWS.</p>
           <a href="https://www.cheapfaremart.com/cars" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">View Live →</a>
         </div>
 
         <!-- Project 2 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.1s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.1s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">Flight Booking API Engine</h3>
-            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium">Live</span>
+            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">Live</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Engineered RESTful APIs for a global flight platform – JWT auth, Redis caching, distributed transactions handling 10K+ req/min.</p>
           <a href="https://www.cheapfaremart.com" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Explore →</a>
         </div>
 
         <!-- Project 3 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.2s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.2s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">INBiz &amp; BSD Modernization</h3>
-            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full font-medium">GovTech</span>
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">GovTech</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Boosted Indiana State’s business-licensing portal – 40% backend speed gain via clean architecture and optimized SQL.</p>
           <a href="https://inbiz.in.gov/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Visit →</a>
         </div>
 
         <!-- Project 4 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.3s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.3s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">Samrat Hardware ERP</h3>
-            <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-medium">E-Commerce</span>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">E-Commerce</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Built a full-featured inventory + order system with payment gateway, analytics dashboard, and role-based access.</p>
           <a href="http://samratsanitary.org/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Live Demo →</a>
         </div>
 
         <!-- Project 5 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.4s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.4s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">Dairy Management API</h3>
-            <span class="text-xs bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full font-medium">Company</span>
+            <span class="text-xs bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">Company</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Designed a scalable .NET Core API for milk collection, quality checks, farmer payouts, and real-time reporting.</p>
           <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">API Docs →</a>
         </div>
 
         <!-- Project 6 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.5s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.5s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">Rent Management System</h3>
-            <span class="text-xs bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full font-medium">Company</span>
+            <span class="text-xs bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">Company</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Building a multi-tenant rent portal – automated invoicing, late-fee calculations, tenant dashboards, and payment integrations.</p>
           <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Preview →</a>
         </div>
 
         <!-- Project 7 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.6s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.6s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">Expense Manager</h3>
-            <span class="text-xs bg-teal-500/20 text-teal-400 px-3 py-1 rounded-full font-medium">Personal</span>
+            <span class="text-xs bg-teal-500/20 text-teal-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">Personal</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">Cross-platform Flutter app with Supabase backend – budget tracking, OCR receipt scanning, and visual analytics.</p>
           <a href="https://expense.abhayupadhyay.dev" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Web Demo →</a>
         </div>
 
         <!-- Project 8 -->
-        <div class="glass neumorphic rounded-2xl p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.7s">
+        <div class="glass neumorphic p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.7s">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold text-white">Task Manager</h3>
-            <span class="text-xs bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full font-medium">Personal</span>
+            <span class="text-xs bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full font-medium whitespace-nowrap">Personal</span>
           </div>
-          <p class="text-gray-300 text-sm leading-relaxed">Collaborative task board built with Flutter & Supabase – Kanban view, real-time sync, notifications, and team permissions.</p>
+          <p class="text-gray-300 text-sm leading-relaxed">Collaborative task board built with Flutter &amp; Supabase – Kanban view, real-time sync, notifications, and team permissions.</p>
           <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Live App →</a>
         </div>
       </div>
@@ -367,7 +311,7 @@
   <footer id="contact" class="py-16 px-6 border-t border-slate-800">
     <div class="max-w-5xl mx-auto text-center">
       <p class="text-gray-500">
-        © 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — 
+        © 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> —
         Handcrafted with precision using GitHub Pages &amp; Tailwind CSS
       </p>
     </div>
