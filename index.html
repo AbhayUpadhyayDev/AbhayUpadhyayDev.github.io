@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhay Upadhyay | Software Engineer</title>
+  <title>Abhay Kumar Upadhyay | Full-Stack Engineer</title>
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Inter Font -->
@@ -16,6 +16,7 @@
 
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
@@ -23,7 +24,7 @@
             primary: '#0EA5E9',
             accent: '#06B6D4',
             dark: '#0F172A',
-            slate: { 50: '#f8fafc', 900: '#0f172a' }
+            slate: { 50: '#f8fafc', 900: '#0f172a', 850: '#1e293b' }
           }
         }
       }
@@ -32,249 +33,178 @@
 
   <style>
     :root { scroll-behavior: smooth; }
-    .glass { 
-      background: rgba(255, 255, 255, 0.1); 
-      backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --card: rgba(30, 41, 59, 0.6);
+      --border: rgba(148, 163, 184, 0.2);
+      --glass: rgba(255, 255, 255, 0.1);
     }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --card: rgba(255, 255, 255, 0.8);
+      --border: rgba(0, 0, 0, 0.1);
+      --glass: rgba(255, 255, 255, 0.7);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* Glassmorphic Card */
+    .glass-card {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 0 20px rgba(14,165,233,0.2);
+    }
+
+    /* Gradient Text */
     .gradient-text {
       background: linear-gradient(to right, #0EA5E9, #06B6D4);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
+    /* Typewriter */
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #0EA5E9;
+      animation: typing 4s steps(50) forwards, blink 0.75s step-end infinite;
+      width: 0;
+    }
+    @keyframes typing { to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    /* Floating Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.2;
+      animation: float 10s ease-in-out infinite;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #0EA5E9; top: -150px; left: -150px; }
+    .orb-2 { width: 600px; height: 600px; background: #06B6D4; bottom: -200px; right: -200px; animation-delay: -5s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-40px) rotate(8deg); }
+    }
+
+    /* Fade Up */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fadeUp {
-      animation: fadeUp 0.7s ease-out forwards;
+      animation: fadeUp 0.8s ease-out forwards;
     }
-    .skill-tag {
-      @apply px-3 py-1 text-xs font-medium rounded-full bg-white/10 text-gray-200 border border-white/20;
+
+    /* Toggle Switch */
+    .toggle-checkbox:checked ~ .toggle-label .toggle-ball {
+      transform: translateX(28px);
     }
-    .project-card {
-      @apply glass rounded-2xl p-6 border border-white/10 transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
-    }
-    .service-card {
-      @apply glass rounded-xl p-6 text-center border border-white/10 transition-all hover:shadow-lg hover:border-primary/30;
+    .toggle-ball {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-slate-900 via-slate-950 to-black text-gray-100 min-h-screen">
+<body data-theme="dark" class="min-h-screen relative overflow-x-hidden">
+
+  <!-- Dark/Light Toggle -->
+  <div class="fixed top-6 right-6 z-50 flex items-center gap-3 glass-card px-4 py-2 rounded-full">
+    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707z"/></svg>
+    <label class="relative inline-flex items-center cursor-pointer">
+      <input type="checkbox" class="sr-only toggle-checkbox" id="theme-toggle">
+      <span class="toggle-label w-14 h-7 bg-gray-600 rounded-full shadow-inner"></span>
+      <span class="toggle-ball absolute top-1 left-1 w-5 h-5 bg-white rounded-full shadow"></span>
+    </label>
+    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+  </div>
+
+  <!-- Floating Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
   <!-- ==================== HERO ==================== -->
-  <header class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-    
-    <div class="relative z-10 max-w-4xl mx-auto text-center">
+  <header class="relative min-h-screen flex items-center justify-center px-6">
+    <div class="relative z-10 max-w-5xl mx-auto text-center">
+      <img src="https://vefugbjqwgyrozkghjwm.supabase.co/storage/v1/object/public/expense_images/avatar_3cf67ab6-24c4-4591-8f24-bdf6a4e27add_1759290575580.jpg"
+           alt="Abhay Kumar Upadhyay"
+           class="w-36 h-36 mx-auto rounded-full ring-4 ring-primary/50 shadow-2xl mb-8">
+
       <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
         Hi, I'm <span class="gradient-text">Abhay</span>
       </h1>
-      <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Full-Stack Engineer</h2>
-      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
-        I craft exceptional digital experiences using modern technologies. Specializing in 
-        <span class="text-primary font-semibold">React</span>, 
-        <span class="text-primary font-semibold">React Native</span>, 
-        <span class="text-primary font-semibold">Node.js</span>, and 
-        <span class="text-primary font-semibold">cloud architecture</span>, 
-        I help businesses build scalable web and mobile applications that drive growth.
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        <span class="typewriter inline-block">Full-Stack Engineer &amp; System Architect</span>
+      </h2>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8">
+        Crafting <span class="text-primary font-bold">high-performance</span>, 
+        <span class="text-accent font-bold">scalable</span> solutions with .NET Core, 
+        Microservices, and Cloud-Native stacks.
       </p>
-      <p class="text-sm text-gray-400 italic">Abhay Upadhyay - Software Engineer</p>
 
-      <!-- CTA -->
-      <div class="mt-10 flex flex-wrap justify-center gap-4">
-        <a href="#contact" class="px-8 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition">
-          Get In Touch
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <a href="https://github.com/abhayupadhyaydev" target="_blank"
+           class="px-6 py-3 bg-primary hover:bg-sky-600 text-white font-semibold rounded-xl shadow-lg transition">
+          GitHub
         </a>
-        <a href="#projects" class="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition">
-          View Projects
+        <a href="https://linkedin.com/in/abhay-kumar-upadhyay-a9b444274" target="_blank"
+           class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 transition">
+          LinkedIn
         </a>
+        <a href="mailto:abhayupadhyay503@gmail.com"
+           class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-primary hover:from-cyan-600 hover:to-sky-600 text-white font-semibold rounded-xl shadow-lg transition">
+          Let’s Talk
+        </a>
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-5 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">
+        Open to Full-Stack / Backend Roles
       </div>
     </div>
   </header>
 
-  <!-- ==================== SKILLS ==================== -->
-  <section id="skills" class="py-24 px-6">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-4 animate-fadeUp">Technical Skills</h2>
-      <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto animate-fadeUp" style="animation-delay:0.2s">
-        I work with modern technologies across the full stack. Here's my expertise organized by category.
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-6 animate-fadeUp">About Me</h2>
+      <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto animate-fadeUp" style="animation-delay:0.2s">
+        Full-Stack Engineer with <strong class="text-primary">2+ years</strong> building production-grade systems for
+        <span class="text-cyan-400">e-commerce, travel, government, logistics, and fintech</span>.
+        I design <strong class="text-white">clean, testable APIs</strong> and deploy
+        <strong class="text-primary">cloud-native microservices</strong> that handle millions in transactions.
       </p>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Frontend -->
-        <div class="glass rounded-xl p-6 animate-fadeUp" style="animation-delay:0.3s">
-          <h3 class="text-xl font-bold text-primary mb-4">Frontend</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Next.js</span>
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">Tailwind CSS</span>
-            <span class="skill-tag">SASS/SCSS</span>
-            <span class="skill-tag">Material-UI</span>
-          </div>
-        </div>
-
-        <!-- Backend -->
-        <div class="glass rounded-xl p-6 animate-fadeUp" style="animation-delay:0.4s">
-          <h3 class="text-xl font-bold text-primary mb-4">Backend</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">NestJS</span>
-            <span class="skill-tag">Express.js</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">FastAPI</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">C#</span>
-            <span class="skill-tag">PHP</span>
-            <span class="skill-tag">REST APIs</span>
-          </div>
-        </div>
-
-        <!-- Database -->
-        <div class="glass rounded-xl p-6 animate-fadeUp" style="animation-delay:0.5s">
-          <h3 class="text-xl font-bold text-primary mb-4">Database</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">MongoDB</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">Redis</span>
-            <span class="skill-tag">Firebase</span>
-            <span class="skill-tag">Supabase</span>
-          </div>
-        </div>
-
-        <!-- Cloud & DevOps -->
-        <div class="glass rounded-xl p-6 animate-fadeUp" style="animation-delay:0.6s">
-          <h3 class="text-xl font-bold text-primary mb-4">Cloud & DevOps</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">AWS</span>
-            <span class="skill-tag">Azure</span>
-            <span class="skill-tag">Google Cloud</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">CI/CD</span>
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">Vercel</span>
-            <span class="skill-tag">Netlify</span>
-          </div>
-        </div>
-
-        <!-- Mobile -->
-        <div class="glass rounded-xl p-6 animate-fadeUp" style="animation-delay:0.7s">
-          <h3 class="text-xl font-bold text-primary mb-4">Mobile</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">React Native</span>
-            <span class="skill-tag">Expo</span>
-            <span class="skill-tag">iOS Development</span>
-            <span class="skill-tag">Android Development</span>
-            <span class="skill-tag">Swift</span>
-            <span class="skill-tag">Kotlin</span>
-            <span class="skill-tag">Flutter</span>
-            <span class="skill-tag">PWA</span>
-            <span class="skill-tag">Responsive Design</span>
-          </div>
-        </div>
-
-        <!-- Tools -->
-        <div class="glass rounded-xl p-6 animate-fadeUp" style="animation-delay:0.8s">
-          <h3 class="text-xl font-bold text-primary mb-4">Tools & Others</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Postman</span>
-            <span class="skill-tag">Jest</span>
-            <span class="skill-tag">Webpack</span>
-            <span class="skill-tag">ESLint</span>
-            <span class="skill-tag">Prettier</span>
-            <span class="skill-tag">Jira</span>
-            <span class="skill-tag">Slack</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ==================== SERVICES ==================== -->
-  <section id="services" class="py-24 px-6 bg-slate-900/50">
+  <!-- ==================== SKILLS ==================== -->
+  <section id="skills" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-4 animate-fadeUp">Services</h2>
-      <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto animate-fadeUp" style="animation-delay:0.2s">
-        I offer comprehensive development services to help bring your digital ideas to life with modern, scalable solutions.
-      </p>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Web Development -->
-        <div class="service-card animate-fadeUp" style="animation-delay:0.3s">
-          <h3 class="text-xl font-bold text-primary mb-3">Web Development</h3>
-          <p class="text-gray-300 mb-4">Custom web applications built with React, Next.js, and modern frameworks. Responsive, fast, and optimized for performance.</p>
-          <ul class="text-sm text-gray-400 space-y-1">
-            <li>Responsive Design</li>
-            <li>Performance Optimization</li>
-            <li>SEO Friendly</li>
-          </ul>
-        </div>
-
-        <!-- Backend -->
-        <div class="service-card animate-fadeUp" style="animation-delay:0.4s">
-          <h3 class="text-xl font-bold text-primary mb-3">Backend Development</h3>
-          <p class="text-gray-300 mb-4">Robust APIs and server-side applications using Node.js, Python, and cloud services for scalable solutions.</p>
-          <ul class="text-sm text-gray-400 space-y-1">
-            <li>RESTful APIs</li>
-            <li>Database Design</li>
-            <li>Cloud Deployment</li>
-          </ul>
-        </div>
-
-        <!-- Mobile -->
-        <div class="service-card animate-fadeUp" style="animation-delay:0.5s">
-          <h3 class="text-xl font-bold text-primary mb-3">Mobile Development</h3>
-          <p class="text-gray-300 mb-4">Cross-platform mobile applications using React Native and Flutter for iOS and Android platforms.</p>
-          <ul class="text-sm text-gray-400 space-y-1">
-            <li>Cross-platform</li>
-            <li>Native Performance</li>
-            <li>App Store Ready</li>
-          </ul>
-        </div>
-
-        <!-- Cloud -->
-        <div class="service-card animate-fadeUp" style="animation-delay:0.6s">
-          <h3 class="text-xl font-bold text-primary mb-3">Cloud Services</h3>
-          <p class="text-gray-300 mb-4">Cloud architecture and deployment using AWS, Docker, and modern DevOps practices for reliable infrastructure.</p>
-          <ul class="text-sm text-gray-400 space-y-1">
-            <li>AWS/Azure Setup</li>
-            <li>CI/CD Pipelines</li>
-            <li>Auto Scaling</li>
-          </ul>
-        </div>
-
-        <!-- SEO -->
-        <div class="service-card animate-fadeUp" style="animation-delay:0.7s">
-          <h3 class="text-xl font-bold text-primary mb-3">SEO Optimization</h3>
-          <p class="text-gray-300 mb-4">Technical SEO implementation and performance optimization to improve search rankings and user experience.</p>
-          <ul class="text-sm text-gray-400 space-y-1">
-            <li>Technical SEO</li>
-            <li>Page Speed</li>
-            <li>Core Web Vitals</li>
-          </ul>
-        </div>
-
-        <!-- Consulting -->
-        <div class="service-card animate-fadeUp" style="animation-delay:0.8s">
-          <h3 class="text-xl font-bold text-primary mb-3">Consulting</h3>
-          <p class="text-gray-300 mb-4">Technical consulting and code reviews to help optimize existing projects and guide technology decisions.</p>
-          <ul class="text-sm text-gray-400 space-y-1">
-            <li>Code Reviews</li>
-            <li>Architecture Planning</li>
-            <li>Team Training</li>
-          </ul>
-        </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-16 animate-fadeUp">Core Expertise</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0s">.NET Core</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.1s">C#</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.2s">ASP.NET API</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.3s">SQL Server</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.4s">AWS</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.5s">Redis</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.6s">Supabase</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.7s">Microservices</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.8s">RESTful APIs</div>
+        <div class="glass-card p-5 rounded-2xl text-center font-semibold text-sm md:text-base animate-fadeUp" style="animation-delay:0.9s">System Design</div>
       </div>
     </div>
   </section>
@@ -282,128 +212,115 @@
   <!-- ==================== PROJECTS ==================== -->
   <section id="projects" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-4 animate-fadeUp">Featured Projects</h2>
-      <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto animate-fadeUp" style="animation-delay:0.2s">
-        Here are some of my recent projects that showcase my skills in full-stack development and modern web technologies.
-      </p>
-
+      <h2 class="text-4xl md:text-5xl font-bold text-center gradient-text mb-16 animate-fadeUp">Production &amp; Personal Systems</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Project 1 -->
-        <div class="project-card animate-fadeUp" style="animation-delay:0.3s">
-          <h3 class="text-xl font-bold text-white mb-2">Career Information Provider</h3>
-          <p class="text-gray-300 text-sm mb-4">A web app designed to guide school students toward their dream careers. It offers tailored information on subjects, courses, and top universities aligned with their career goals.</p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">HTML</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">CSS</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">JavaScript</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">PHP</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">MySQL</span>
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">CheapFareMart Car Booking</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full">Live</span>
           </div>
-          <p class="text-xs text-gray-500 mb-3">2019 - 2020</p>
-          <a href="#" class="text-primary font-medium hover:text-accent transition">View Project →</a>
+          <p class="text-sm leading-relaxed">Led full-stack development of a high-throughput car-rental platform – real-time inventory, secure payments, third-party API orchestration with .NET Core microservices on AWS.</p>
+          <a href="https://www.cheapfaremart.com/cars" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">View Live →</a>
         </div>
 
         <!-- Project 2 -->
-        <div class="project-card animate-fadeUp" style="animation-delay:0.4s">
-          <h3 class="text-xl font-bold text-white mb-2">MERI PathShala</h3>
-          <p class="text-gray-300 text-sm mb-4">A learning platform for students to access recorded lectures when they miss classes. Teachers can manage academic records and activities.</p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">React Native</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">Node.js</span>
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.1s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">Flight Booking API Engine</h3>
+            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full">Live</span>
           </div>
-          <p class="text-xs text-gray-500 mb-3">2020 - 2021</p>
-          <a href="#" class="text-primary font-medium hover:text-accent transition">View Project →</a>
+          <p class="text-sm leading-relaxed">Engineered RESTful APIs for a global flight platform – JWT auth, Redis caching, distributed transactions handling 10K+ req/min.</p>
+          <a href="https://www.cheapfaremart.com" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Explore →</a>
         </div>
 
         <!-- Project 3 -->
-        <div class="project-card animate-fadeUp" style="animation-delay:0.5s">
-          <h3 class="text-xl font-bold text-white mb-2">Object Detection</h3>
-          <p class="text-gray-300 text-sm mb-4">A low-cost, offline application designed to make object detection and tracking-based surveillance systems accessible to everyone.</p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">React Native</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">TypeScript</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">TensorFlow</span>
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.2s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">INBiz &amp; BSD Modernization</h3>
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full">GovTech</span>
           </div>
-          <p class="text-xs text-gray-500 mb-3">2021</p>
-          <a href="#" class="text-primary font-medium hover:text-accent transition">View Project →</a>
+          <p class="text-sm leading-relaxed">Boosted Indiana State’s business-licensing portal – 40% backend speed gain via clean architecture and optimized SQL.</p>
+          <a href="https://inbiz.in.gov/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Visit →</a>
         </div>
 
         <!-- Project 4 -->
-        <div class="project-card animate-fadeUp" style="animation-delay:0.6s">
-          <h3 class="text-xl font-bold text-white mb-2">Mediator</h3>
-          <p class="text-gray-300 text-sm mb-4">A simple chatting application enabling user-to-user communication directly. No group chat, focused on personal interactions.</p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">React Native</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">Firebase</span>
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.3s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">Samrat Hardware ERP</h3>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full">E-Commerce</span>
           </div>
-          <p class="text-xs text-gray-500 mb-3">2021</p>
-          <a href="#" class="text-primary font-medium hover:text-accent transition">View Project →</a>
+          <p class="text-sm leading-relaxed">Built a full-featured inventory + order system with payment gateway, analytics dashboard, and role-based access.</p>
+          <a href="http://samratsanitary.org/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Live Demo →</a>
         </div>
 
         <!-- Project 5 -->
-        <div class="project-card animate-fadeUp" style="animation-delay:0.7s">
-          <h3 class="text-xl font-bold text-white mb-2">Helicopter 2D</h3>
-          <p class="text-gray-300 text-sm mb-4">A fun and engaging 2D game built to practice React Native skills and explore new development techniques.</p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">React Native</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">JavaScript</span>
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.4s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">Dairy Management API</h3>
+            <span class="text-xs bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full">Company</span>
           </div>
-          <p class="text-xs text-gray-500 mb-3">2021</p>
-          <a href="#" class="text-primary font-medium hover:text-accent transition">View Project →</a>
+          <p class="text-sm leading-relaxed">Designed a scalable .NET Core API for milk collection, quality checks, farmer payouts, and real-time reporting.</p>
+          <a href="http://dairymanager.edorotechnologies.com/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">API Docs →</a>
         </div>
 
         <!-- Project 6 -->
-        <div class="project-card animate-fadeUp" style="animation-delay:0.8s">
-          <h3 class="text-xl font-bold text-white mb-2">Tic Tac Toe</h3>
-          <p class="text-gray-300 text-sm mb-4">A simple implementation of the classic Tic-Tac-Toe game, developed for fun and out of interest in game development.</p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">React Native</span>
-            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">JavaScript</span>
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.5s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">Rent Management System</h3>
+            <span class="text-xs bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full">Company</span>
           </div>
-          <p class="text-xs text-gray-500 mb-3">2021</p>
-          <a href="#" class="text-primary font-medium hover:text-accent transition">View Project →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== CONTACT ==================== -->
-  <section id="contact" class="py-24 px-6 bg-slate-900/50">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4 animate-fadeUp">Let's Work Together</h2>
-      <p class="text-lg text-gray-300 mb-8 animate-fadeUp" style="animation-delay:0.2s">
-        Ready to bring your ideas to life? Let's discuss your project and create something amazing together.
-      </p>
-
-      <div class="glass rounded-2xl p-8 max-w-2xl mx-auto animate-fadeUp" style="animation-delay:0.3s">
-        <h3 class="text-2xl font-bold text-primary mb-6">Get In Touch</h3>
-        <div class="space-y-4 text-gray-300">
-          <p><strong>Email:</strong> <a href="mailto:abhayaku21@gmail.com" class="text-primary hover:underline">abhayaku21@gmail.com</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+919125957424" class="text-primary hover:underline">+91-9125957424</a></p>
-          <p><strong>Location:</strong> Somewhere in India</p>
+          <p class="text-sm leading-relaxed">Building a multi-tenant rent portal – automated invoicing, late-fee calculations, tenant dashboards, and payment integrations.</p>
+          <a href="http://rentmanager.edorotechnologies.com/" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Preview →</a>
         </div>
 
-        <div class="mt-8 grid md:grid-cols-3 gap-6 text-sm">
-          <div class="text-center">
-            <h4 class="font-semibold text-primary mb-2">Got a Project in Mind?</h4>
-            <p class="text-gray-400">Whether it's a web application, mobile app, or consulting project, I'd love to hear about it.</p>
+        <!-- Project 7 -->
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.6s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">Expense Manager</h3>
+            <span class="text-xs bg-teal-500/20 text-teal-400 px-3 py-1 rounded-full">Personal</span>
           </div>
-          <div class="text-center">
-            <h4 class="font-semibold text-primary mb-2">Collaboration</h4>
-            <p class="text-gray-400">Open to freelance work, consulting, and interesting collaboration opportunities.</p>
+          <p class="text-sm leading-relaxed">Cross-platform Flutter app with Supabase backend – budget tracking, OCR receipt scanning, and visual analytics.</p>
+          <a href="https://expense.abhayupadhyay.dev" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Web Demo →</a>
+        </div>
+
+        <!-- Project 8 -->
+        <div class="glass-card p-7 border border-slate-700 animate-fadeUp" style="animation-delay:0.7s">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">Task Manager</h3>
+            <span class="text-xs bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full">Personal</span>
           </div>
-          <div class="text-center">
-            <h4 class="font-semibold text-primary mb-2">Quick Turnaround</h4>
-            <p class="text-gray-400">Fast response times and efficient project delivery to meet your deadlines.</p>
-          </div>
+          <p class="text-sm leading-relaxed">Collaborative task board built with Flutter & Supabase – Kanban view, real-time sync, notifications, and team permissions.</p>
+          <a href="https://tasks.abhayupadhyay.dev" target="_blank" class="mt-5 inline-flex items-center text-primary font-semibold hover:text-accent transition">Live App →</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="py-12 px-6 border-t border-white/10 text-center text-gray-500 text-sm">
-    <p>© 2025 <span class="text-primary font-semibold">Abhay Upadhyay</span> — Built with Tailwind CSS &amp; Passion</p>
+  <footer id="contact" class="py-16 px-6 border-t border-white/10">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-sm">
+        © 2025 <span class="text-primary font-semibold">Abhay Kumar Upadhyay</span> — 
+        Handcrafted with precision using GitHub Pages &amp; Tailwind CSS
+      </p>
+    </div>
   </footer>
+
+  <!-- Theme Toggle Script (CSS-only) -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    toggle.addEventListener('change', () => {
+      html.setAttribute('data-theme', toggle.checked ? 'light' : 'dark');
+    });
+
+    // Auto-detect system preference
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      toggle.checked = true;
+      html.setAttribute('data-theme', 'light');
+    }
+  </script>
 </body>
 </html>
